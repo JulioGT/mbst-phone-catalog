@@ -1,0 +1,50 @@
+.form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-text);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* The native clear control duplicates ours. */
+.input::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+.input:focus-visible {
+  outline: none;
+}
+
+/* The underline doubles as the focus indicator for the input (deviation 3). */
+.form:focus-within {
+  border-bottom-width: 2px;
+  margin-bottom: -1px;
+}
+
+.clear {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-right: calc(-1 * var(--space-3));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}

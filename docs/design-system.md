@@ -67,5 +67,9 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 11. **The logo is a text stand-in** ("MBST" in bold) until the SVG export is available.
 12. **The bag link has a 44x44px touch target**, larger than the drawn icon, for touch accessibility (WCAG 2.5.5).
 13. **A "Skip to content" link** appears on the first Tab press; it is invisible otherwise.
+14. **Product cards underline the name on hover** (the designs show no hover state) and the whole card is one link.
+15. **The search underline thickens on focus**, which is the input's focus indicator.
+16. **The clear "x" has a 44x44px touch target** around the small icon.
+17. **Brand labels on cards are 12px** (the frames look smaller; deviation 4 sets our minimum).
 
 Every new deviation is added to this list in the same commit that introduces it.

@@ -7,6 +7,8 @@ import { createRoot } from 'react-dom/client';
 import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 import { CartProvider } from './application/cart/cart-context';
+import { CatalogGatewayProvider } from './application/catalog/catalog-gateway-context';
+import { HttpCatalogGateway } from './infrastructure/http-catalog-gateway';
 import { LocalStorageCartStorage } from './infrastructure/local-storage-cart-storage';
 import { routes } from './ui/routes';
 import './ui/styles/tokens.css';
@@ -18,12 +20,15 @@ if (container === null) {
 }
 
 const cartStorage = new LocalStorageCartStorage(() => window.localStorage);
+const catalogGateway = new HttpCatalogGateway();
 const router = createBrowserRouter(routes);
 
 createRoot(container).render(
   <StrictMode>
-    <CartProvider storage={cartStorage}>
-      <RouterProvider router={router} />
-    </CartProvider>
+    <CatalogGatewayProvider gateway={catalogGateway}>
+      <CartProvider storage={cartStorage}>
+        <RouterProvider router={router} />
+      </CartProvider>
+    </CatalogGatewayProvider>
   </StrictMode>,
 );

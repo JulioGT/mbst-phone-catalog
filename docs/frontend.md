@@ -1,6 +1,8 @@
 # Frontend (React 19)
 
-> Status: conventions for chunks 4 to 9. Nothing here is implemented yet.
+> Status: foundation implemented (chunk 4): Rsbuild dev/prod, routing, layout and header, tokens, cart domain and context, localStorage adapter, Jest setup. Pages get their content in chunks 5-7.
+
+Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them.
 
 ## Stack
 
@@ -16,17 +18,21 @@ application/
   catalog/        useProductSearch, useProductDetail
 infrastructure/   HttpCatalogGateway, LocalStorageCartStorage
 ui/
-  pages/          ProductListPage, ProductDetailPage, CartPage
-  components/     Header, SearchBox, ProductCard, ProductGrid, ...
+  app-layout.tsx  skip link, header, <main>; moves focus to the h1 after navigation
+  routes.tsx      route table shared by the browser router (and the server renderer, chunk 9)
+  pages/          ProductListPage, ProductDetailPage, CartPage, NotFoundPage
+  components/     Header, PageHeading, icons, SearchBox, ProductCard, ProductGrid, ...
   styles/         tokens.css, base.css
 copy.ts           All user-facing strings (verbatim from Figma)
 main.tsx          composition root
+test/             renderApp, builders, test doubles, Jest setup (outside the layers)
 ```
 
 ## State
 
 - **Server data** (products) lives in hooks that call the `CatalogGateway` port. Loading, error and empty states are modeled explicitly, never inferred from `undefined`.
-- **Cart** lives in one Context. Cart rules are pure functions in `domain`; the Context holds state, calls those functions and persists through the `CartStorage` port. Stored data is validated when loaded, so corrupt `localStorage` cannot crash the app.
+- **Document title** is set with React 19's `<title>` element inside each page (hoisted into `<head>`; works with SSR too).
+- **Cart** lives in one Context. Cart rules are pure functions in `domain`; the Context holds state, calls those functions and persists through the `CartStorage` port. Stored data is validated when loaded, so corrupt `localStorage` cannot crash the app. The cart is read after mount and never saved before it is read, so a first render cannot wipe the stored cart. The storage key is `mbst.cart`, with a `version` field for future migrations.
 - **Search term** lives in the URL (`?q=samsung`), so Back/Forward and shared links behave. The input is debounced (about 300 ms). Each new request aborts the previous one with `AbortController`, so a slow old response can never overwrite a newer one.
 - **Detail selection** (storage, color) is local component state.
 

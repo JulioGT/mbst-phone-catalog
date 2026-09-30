@@ -6,7 +6,7 @@ Source of truth: the Figma file supplied with the challenge (desktop, tablet and
 
 Monochrome, editorial, dense typography, thin borders, no shadows or rounded corners. Uppercase for labels, names and brands. Color is used only for the single destructive action (`Eliminar`).
 
-## Tokens *(planned: `apps/web/src/ui/styles/tokens.css`)*
+## Tokens (`apps/web/src/ui/styles/tokens.css`)
 
 Two tiers only: primitives, then semantic names that components use.
 
@@ -63,5 +63,9 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 8. **`PAY` is present but disabled and labeled**: checkout is outside the challenge.
 9. **The clear-search "x" has an accessible name.**
 10. **States the design omits** (loading, no results, error, not found) are ours; see `information-architecture.md`.
+
+11. **The logo is a text stand-in** ("MBST" in bold) until the SVG export is available.
+12. **The bag link has a 44x44px touch target**, larger than the drawn icon, for touch accessibility (WCAG 2.5.5).
+13. **A "Skip to content" link** appears on the first Tab press; it is invisible otherwise.
 
 Every new deviation is added to this list in the same commit that introduces it.

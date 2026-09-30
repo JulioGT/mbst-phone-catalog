@@ -1,0 +1,64 @@
+/**
+ * Design tokens (docs/design-system.md). Values marked "estimated" come from
+ * screenshots; replace them with Figma Inspect values here and nowhere else.
+ * Components use the semantic tokens, never the primitives.
+ */
+:root {
+  /* Primitives */
+  --font-family-base: Helvetica, Arial, sans-serif;
+  --color-black: #000000;
+  --color-ink: #151515; /* estimated */
+  --color-white: #ffffff;
+  --color-grey-100: #eeeeee; /* estimated */
+  --color-grey-600: #6b6b6b; /* estimated, darkened for AA contrast */
+  --color-grey-700: #4d4d4d; /* estimated */
+  --color-red-700: #d0021b; /* estimated */
+
+  /* Semantic colors */
+  --color-background: var(--color-white);
+  --color-text: var(--color-black);
+  --color-text-muted: var(--color-grey-600);
+  --color-border: var(--color-grey-700);
+  --color-action: var(--color-ink);
+  --color-action-text: var(--color-white);
+  --color-action-disabled: var(--color-grey-100);
+  --color-danger: var(--color-red-700);
+  --color-focus: var(--color-black);
+
+  /* Spacing: 4px scale (estimated) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-25: 100px;
+
+  /* Type (estimated; never below 12px, deviation 4) */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 24px;
+  --font-weight-regular: 300;
+  --font-weight-bold: 700;
+  --line-height-base: 1.4;
+
+  /* Layout */
+  --page-gutter: var(--space-6);
+  --header-height: 80px; /* estimated */
+  --focus-ring: 2px solid var(--color-focus);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: var(--space-10);
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --page-gutter: var(--space-25);
+  }
+}

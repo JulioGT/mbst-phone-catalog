@@ -1,6 +1,6 @@
 # 0008. Pin TypeScript 5.9 and dependency-cruiser 16
 
-- Status: accepted
+- Status: accepted; the Node 18 requirement is superseded by ADR 0010
 - Date: 2026-09-30
 
 ## Context

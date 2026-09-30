@@ -14,6 +14,8 @@ describe('loadConfig', () => {
       catalogApiTimeoutMs: 15000,
       port: 3000,
       featureFlags: '',
+      serveWebApp: false,
+      catalogImageOrigin: 'https://catalog.test',
     });
   });
 
@@ -57,5 +59,13 @@ describe('loadConfig', () => {
       .to.throw(InvalidConfigError)
       .with.property('message')
       .that.does.not.include('secret-key-value');
+  });
+
+  it('serves the web app only when asked to', () => {
+    expect(loadConfig({ ...valid, SERVE_WEB_APP: 'true' }).serveWebApp).to.equal(true);
+    expect(() => loadConfig({ ...valid, SERVE_WEB_APP: 'yes' })).to.throw(
+      InvalidConfigError,
+      /SERVE_WEB_APP/,
+    );
   });
 });

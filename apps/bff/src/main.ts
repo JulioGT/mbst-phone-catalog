@@ -2,6 +2,8 @@
  * Composition root: the only place that reads the environment, builds the
  * adapters and wires them into the use cases (docs/architecture.md).
  */
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import { GetProductDetail } from './application/get-product-detail';
 import { ListProducts } from './application/list-products';
 import { HttpProductCatalog } from './infrastructure/catalog/http-product-catalog';
@@ -12,7 +14,15 @@ import { JsonLineLogger } from './infrastructure/logging/json-line-logger';
 
 const logger = new JsonLineLogger(process.stdout);
 
+/** Both `src/main.ts` (development) and `dist/main.js` (production) sit two levels below the repo's apps/. */
+const ROOT_ENV_FILE = fileURLToPath(new URL('../../../.env', import.meta.url));
+const WEB_APP_DIRECTORY = fileURLToPath(new URL('../../web/dist', import.meta.url));
+
 function start(): void {
+  // Local runs read the repo's .env; hosts such as Render set real environment variables instead.
+  if (existsSync(ROOT_ENV_FILE)) {
+    process.loadEnvFile(ROOT_ENV_FILE);
+  }
   const config = loadConfig(process.env);
 
   const flags = new EnvFeatureFlags(config.featureFlags);
@@ -27,10 +37,18 @@ function start(): void {
     logger,
   });
 
+  if (config.serveWebApp && !existsSync(`${WEB_APP_DIRECTORY}/index.html`)) {
+    throw new Error(
+      `SERVE_WEB_APP is true but ${WEB_APP_DIRECTORY} has no build. Run pnpm build first.`,
+    );
+  }
+
   const app = createApp({
     listProducts: new ListProducts(catalog),
     getProductDetail: new GetProductDetail(catalog, flags),
     logger,
+    imageOrigins: [config.catalogImageOrigin],
+    ...(config.serveWebApp ? { webAppDirectory: WEB_APP_DIRECTORY } : {}),
   });
 
   const server = app.listen(config.port, () => {

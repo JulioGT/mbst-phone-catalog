@@ -7,11 +7,16 @@ import type { Logger } from '../../application/ports/logger';
 import { toProductDetailDto, toProductSummaryDto } from './dto-mapping';
 import { toErrorResponse } from './error-response';
 import { parseListQuery } from './request-schemas';
+import { webAppRoutes } from './web-app';
 
 export interface AppDependencies {
   readonly listProducts: ListProducts;
   readonly getProductDetail: GetProductDetail;
   readonly logger: Logger;
+  /** Built web app to serve (production). Without it, only the API is served (development). */
+  readonly webAppDirectory?: string;
+  /** Hosts the pages may load images from, besides this one (the catalog's image host). */
+  readonly imageOrigins?: readonly string[];
 }
 
 function productRoutes({ listProducts, getProductDetail }: AppDependencies): Router {
@@ -34,7 +39,13 @@ function productRoutes({ listProducts, getProductDetail }: AppDependencies): Rou
 export function createApp(dependencies: AppDependencies): Express {
   const app = express();
   app.disable('x-powered-by');
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: { 'img-src': ["'self'", 'data:', ...(dependencies.imageOrigins ?? [])] },
+      },
+    }),
+  );
 
   app.get(API_PATHS.health, (_request, response) => {
     response.json({ status: 'ok' });
@@ -45,6 +56,10 @@ export function createApp(dependencies: AppDependencies): Express {
     const body: ApiErrorDto = { error: 'NOT_FOUND', message: 'Unknown API route.' };
     response.status(404).json(body);
   });
+
+  if (dependencies.webAppDirectory !== undefined) {
+    app.use(webAppRoutes(dependencies.webAppDirectory));
+  }
 
   const handleError: ErrorRequestHandler = (error, _request, response, _next) => {
     const { status, body } = toErrorResponse(error, dependencies.logger);

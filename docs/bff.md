@@ -56,6 +56,7 @@ Read once, at startup, in `main.ts`, and validated. The process refuses to start
 | `CATALOG_API_TIMEOUT_MS` | Upstream timeout |
 | `PORT` | Listen port |
 | `FEATURE_FLAGS` | Comma-separated flags that are ON |
+| `SERVE_WEB_APP` | `true` in production: also serve the built web app (`apps/web/dist`) with an `index.html` fallback for page URLs |
 
 ## Upstream adapter responsibilities
 
@@ -79,7 +80,8 @@ A tiny `Logger` port with a JSON-line adapter writing to stdout. `console.*` is 
 - The API key exists only in the BFF process environment.
 - Responses set conservative headers (`helmet`), and no CORS is enabled because the browser only calls its own origin.
 - Input from the query string is validated before it is forwarded upstream.
-- `helmet`'s default Content-Security-Policy allows images only from the BFF's own origin. When the BFF serves the web app (chunk 4), `img-src` must also allow the catalog's image host.
+- `helmet`'s Content-Security-Policy allows images from the app itself and the catalog's host only (`img-src`, derived from `CATALOG_API_BASE_URL`).
+- Production build: `esbuild` bundles `src/main.ts` (and `packages/contracts`) into `dist/main.js`; `express`, `helmet` and `zod` stay external. See `docs/deployment.md`.
 - `pnpm dev` loads the root `.env` with Node's `--env-file` flag. Production hosts (Render) set the variables directly.
 
 ## Testing

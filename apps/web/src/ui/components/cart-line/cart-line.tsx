@@ -1,8 +1,8 @@
-import type { Ref } from "react";
-import { copy } from "../../../copy";
-import type { CartLine as CartLineModel } from "../../../domain/cart";
-import { formatPrice } from "../../format-price";
-import styles from "./cart-line.module.css";
+import type { Ref } from 'react';
+import { copy } from '../../../copy';
+import type { CartLine as CartLineModel } from '../../../domain/cart';
+import { formatPrice } from '../../format-price';
+import styles from './cart-line.module.css';
 
 export interface CartLineProps {
   readonly line: CartLineModel;
@@ -30,11 +30,7 @@ export function CartLine({ line, onRemove, removeButtonRef }: CartLineProps) {
           ref={removeButtonRef}
           type="button"
           className={styles.remove}
-          aria-label={copy.cart.removeLabel(
-            line.name,
-            line.storage,
-            line.colorName,
-          )}
+          aria-label={copy.cart.removeLabel(line.name, line.storage, line.colorName)}
           onClick={() => onRemove(line)}
         >
           {copy.cart.remove}

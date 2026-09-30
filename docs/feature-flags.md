@@ -1,6 +1,6 @@
 # Feature flags and experimentation
 
-> Status: design. Implemented in chunks 3 and 6; the GrowthBook adapter is documented but not built (it is not part of the challenge).
+> Status: the BFF side is implemented (`EnvFeatureFlags`, chunk 3); the UI side comes in chunk 6. The GrowthBook adapter is documented but not built (it is not part of the challenge).
 
 ## Concept
 

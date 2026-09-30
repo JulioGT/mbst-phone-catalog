@@ -22,16 +22,20 @@ export interface StorageOption {
   readonly price: Money;
 }
 
-/** Fixed table of technical attributes. Values are display text, kept verbatim. */
+/**
+ * Technical attributes. Values are display text, kept verbatim (including
+ * placeholders such as "No especificado"). Any of them may be missing: the
+ * remote catalog does not fill every attribute for every phone.
+ */
 export interface Specifications {
-  readonly screen: string;
-  readonly resolution: string;
-  readonly processor: string;
-  readonly mainCamera: string;
-  readonly selfieCamera: string;
-  readonly battery: string;
-  readonly os: string;
-  readonly screenRefreshRate: string;
+  readonly screen?: string;
+  readonly resolution?: string;
+  readonly processor?: string;
+  readonly mainCamera?: string;
+  readonly selfieCamera?: string;
+  readonly battery?: string;
+  readonly os?: string;
+  readonly screenRefreshRate?: string;
 }
 
 export interface ProductDetail {

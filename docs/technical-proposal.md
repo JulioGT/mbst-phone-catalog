@@ -40,7 +40,7 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 |---|---|---|---|
 | 1 | Foundation: monorepo, tooling, architecture guardrail, docs and agent files | 3-4 h | delivered |
 | 2 | BFF core: domain, use cases, ports, in-memory adapters | 4-6 h | delivered |
-| 3 | BFF edges: contracts (DTOs + schemas), upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | planned |
+| 3 | BFF edges: contracts (DTOs + schemas), upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | delivered |
 | 4 | Web foundation: Rsbuild dev/prod, tokens, layout, routing, cart domain and context, storage adapter, test setup | 5-7 h | planned |
 | 5 | List and search | 5-7 h | planned |
 | 6 | Detail | 6-8 h | planned |
@@ -55,4 +55,4 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 
 - Exact colors, spacing and type sizes are estimated from screenshots (see `design-system.md`).
 - The MBST logo is a text placeholder until an SVG export is provided.
-- Checked against real responses: `search` is case-insensitive and `limit` works. Still to be verified live: brand search, duplicates, and whether `basePrice` equals the cheapest storage price (`api-contract.md`).
+- Verified live on 2026-09-30 (`api-contract.md`): brand search works, the list contains a duplicate, and `basePrice` is not always the cheapest storage price. The last one is an open UX decision for chunk 6.

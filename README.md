@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/JulioGT/mbst-phone-catalog/actions/workflows/ci.yml/badge.svg)](https://github.com/JulioGT/mbst-phone-catalog/actions/workflows/ci.yml)
 
+**Live demo: https://mbst-phone-catalog.onrender.com** (free hosting: after 15 minutes without visitors the first request can take 30-60 seconds to wake the service up)
+
 A phone catalog built for the Inditex / Zara frontend challenge: browse and search smartphones, pick storage and color, and keep a cart between visits. A **React 19** app talks only to its own **Express BFF** (backend for frontend), which holds the API key and cleans up the remote catalog API. Both apps follow **hexagonal architecture**, enforced by an automated check.
 
 - [Quick start](#quick-start)
@@ -68,7 +70,8 @@ Every requirement of the challenge, and where it lives:
 | Tests, accessibility, linters and formatters, clean console | See [Quality](#quality) |
 | Node 18, React ≥ 17, React Context, `x-api-key` | React 19 with Context; the key is sent by the BFF only. **Node 20.19+ instead of 18**, see [Key decisions](#key-decisions) |
 | Optional: CSS variables | Yes: design tokens as custom properties |
-| Optional: SSR, deployment | Planned next, see [Known limitations](#known-limitations-and-next-steps) |
+| Optional: deployment | Live on Render: https://mbst-phone-catalog.onrender.com ([how](docs/deployment.md)) |
+| Optional: SSR | Planned next, see [Known limitations](#known-limitations-and-next-steps) |
 
 ## Architecture
 
@@ -175,7 +178,6 @@ The work was delivered in chunks ([`docs/technical-proposal.md`](docs/technical-
 
 - **Server-side rendering** of the list and detail pages is the next planned step. The code is already SSR-safe: no browser APIs at module level, the cart is read after mount, and the routes and data access go through replaceable ports.
 - **End-to-end tests (Cypress)** against the BFF with a stubbed remote API are planned after SSR.
-- **Deployment** on Render is described as code in [`render.yaml`](render.yaml); see [`docs/deployment.md`](docs/deployment.md).
 - **Design values are estimates.** The Figma file could not be inspected, so colors, spacing and type sizes come from screenshots and live in `tokens.css`. The MBST logo is a text stand-in.
 - **Cart prices are snapshots.** If the catalog price changes after adding, the cart keeps the old price (by design, [ADR 0006](docs/decisions/0006-money-and-cart-snapshots.md)).
 - **Checkout is out of scope**: `PAY` is visible but disabled, with an explanation.

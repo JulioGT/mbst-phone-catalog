@@ -39,8 +39,8 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 | # | Chunk | Estimate | Status |
 |---|---|---|---|
 | 1 | Foundation: monorepo, tooling, architecture guardrail, docs and agent files | 3-4 h | delivered |
-| 2 | BFF core: domain, use cases, ports, in-memory adapters, contracts | 4-6 h | planned |
-| 3 | BFF edges: upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | planned |
+| 2 | BFF core: domain, use cases, ports, in-memory adapters | 4-6 h | delivered |
+| 3 | BFF edges: contracts (DTOs + schemas), upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | planned |
 | 4 | Web foundation: Rsbuild dev/prod, tokens, layout, routing, cart domain and context, storage adapter, test setup | 5-7 h | planned |
 | 5 | List and search | 5-7 h | planned |
 | 6 | Detail | 6-8 h | planned |

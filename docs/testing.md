@@ -16,6 +16,8 @@ Tests describe behavior, not implementation. A good test name reads as a require
 
 The end-to-end suite stubs the **upstream** API (behind the BFF), not the browser's requests: once pages are server-rendered, the server makes the data calls and browser-side interception cannot see them.
 
+BFF tests live in `apps/bff/test/` (mirroring `src/`) and run with `pnpm test`; web tests are co-located with components. Shared test data comes from builders such as `aProductSummary()` in `apps/bff/test/builders.ts`.
+
 ## Rules
 
 - **Query by what users perceive**: `getByRole`, `getByLabelText`, `getByText`. Use test ids only as a last resort.

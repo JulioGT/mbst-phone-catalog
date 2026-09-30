@@ -14,3 +14,7 @@ BFF: `express`, `zod`, `helmet`. Web: `react`, `react-dom`, `react-router`, `zod
 ## Consequences
 
 A small, known dependency surface. Each addition is justified where it is first used.
+
+## Additions
+
+- Chunk 2 (dev only): `tsx`, so Mocha can load TypeScript tests directly. It brings `esbuild`, whose install script pnpm blocks by default; it is denied explicitly in `pnpm-workspace.yaml` (`allowBuilds`) because esbuild ships its binary as an optional dependency and works without the script.

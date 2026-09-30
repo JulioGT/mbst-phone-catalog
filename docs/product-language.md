@@ -17,6 +17,7 @@ One vocabulary for the design, the API, the code, the tests and the copy. If a w
 | **Selection** | The storage and color a shopper has chosen so far (either may be missing) | `ProductSelection` | none |
 | **Specifications** | Fixed table of technical attributes | `specs` | `SPECIFICATIONS` |
 | **Similar products** | Products suggested on a detail page | `similarProducts` | `SIMILAR ITEMS` |
+| **Product query** | What to list: an optional search term and a limit (default 20) | `ProductQuery` | none |
 | **Search term** | Text typed in the search box, matched against brand or name | `searchTerm` (URL param `q`) | `Search for a smartphone...` |
 | **Result count** | Number of products currently listed | `resultCount` | `20 RESULTS` |
 | **Cart** | What the shopper intends to buy; persisted in the browser | `Cart` | `CART (n)` |

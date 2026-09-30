@@ -14,15 +14,16 @@ Work is delivered in chunks (table in `docs/technical-proposal.md`). Implement o
 
 ```bash
 pnpm install        # Node >= 18.18, pnpm 12 via `npm install -g pnpm@12.8.1`
-pnpm verify         # lint + architecture check + architecture tests + typecheck. Must pass before every commit.
+pnpm verify         # lint + architecture check + architecture tests + typecheck + tests. Must pass before every commit.
 pnpm lint           # Biome check (lint + format + import order)
 pnpm lint:fix       # apply safe fixes
 pnpm typecheck      # tsc --noEmit in every workspace, via Turborepo
 pnpm check:arch     # hexagonal layering rules (dependency-cruiser)
 pnpm test:arch      # proves those rules fire
+pnpm test           # unit and integration tests in every workspace (BFF: Mocha + Chai)
 ```
 
-`test`, `dev`, `build` and `start` scripts are added by the chunk that introduces them; this file is updated in the same commit.
+`dev`, `build` and `start` scripts are added by the chunk that introduces them; this file is updated in the same commit.
 
 ## Repo map
 

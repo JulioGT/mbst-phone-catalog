@@ -1,6 +1,6 @@
 # BFF (Express)
 
-> Status: design for chunks 2 and 3. Nothing here is implemented yet.
+> Status: chunk 2 delivered the core (domain, ports, use cases, in-memory adapters). The HTTP adapter, routes, configuration and logging described below are chunk 3.
 
 The BFF exists for three reasons: keep `x-api-key` out of the browser, give the UI a clean and stable API, and contain the remote API's quirks in one place.
 
@@ -27,6 +27,10 @@ infrastructure/
   http/           Express app, routes, DTO mapping, error middleware
 main.ts           composition root: reads config, builds adapters, starts the server
 ```
+
+Tests live in `apps/bff/test/`, mirroring `src/`. They are kept out of `src/` because a domain test imports Chai, which the `domain-is-pure` rule forbids inside `src/domain/`.
+
+The list query is a domain rule (`domain/product-query.ts`): the search term is trimmed (blank means no search), `limit` defaults to 20 and must be 1..50, and the term is at most 100 characters. `ListProducts` also caps the result at `limit` even if the catalog returns more. Routes (chunk 3) turn `InvalidProductQueryError` into `400`.
 
 ## Configuration
 

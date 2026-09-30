@@ -9,7 +9,7 @@ The challenge specifies Node 18. At the time of writing the latest releases are 
 
 ## Decision
 
-Pin TypeScript 5.9.3 and dependency-cruiser 16.10.4, both exact. Verify the whole toolchain on Node 18.20 and 22. CI runs both.
+Pin TypeScript 5.9.3 and dependency-cruiser 16.10.4, both exact. For the same reason the BFF tests use Mocha 11 (Mocha 12 requires Node 20.19 or later); `tsx` runs the TypeScript tests without a build step. Verify the whole toolchain on Node 18.20 and 22. CI runs both.
 
 ## Consequences
 

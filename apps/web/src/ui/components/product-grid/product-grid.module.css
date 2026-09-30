@@ -35,7 +35,14 @@
 .skeletonLine {
   display: block;
   background: var(--color-action-disabled);
-  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+/* Motion only for people who have not asked their system to reduce it. */
+@media (prefers-reduced-motion: no-preference) {
+  .skeletonImage,
+  .skeletonLine {
+    animation: pulse 1.2s ease-in-out infinite alternate;
+  }
 }
 
 .skeletonImage {

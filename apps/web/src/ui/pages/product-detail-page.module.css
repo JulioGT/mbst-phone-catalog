@@ -15,7 +15,13 @@
 .skeleton {
   aspect-ratio: 2 / 1;
   background: var(--color-action-disabled);
-  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+/* Motion only for people who have not asked their system to reduce it. */
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton {
+    animation: pulse 1.2s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes pulse {

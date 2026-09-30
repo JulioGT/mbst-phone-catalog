@@ -1,0 +1,115 @@
+/* The footer sits at the bottom of the window, as in the designs, even with few lines. */
+.page {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-12);
+  min-height: calc(100dvh - var(--header-height) - var(--space-12));
+  padding-top: var(--space-8);
+}
+
+.content {
+  display: grid;
+  align-content: start;
+  gap: var(--space-12);
+}
+
+.heading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+}
+
+.empty {
+  color: var(--color-text-muted);
+}
+
+.lines {
+  display: grid;
+  gap: var(--space-12);
+  padding: 0;
+  list-style: none;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.total {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-md);
+}
+
+.continue,
+.pay {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+}
+
+.continue {
+  border: 1px solid var(--color-text);
+  color: var(--color-text);
+}
+
+.payBox {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pay {
+  width: 100%;
+  border: 0;
+  background: var(--color-action);
+  color: var(--color-action-text);
+  cursor: not-allowed;
+}
+
+.payNote {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* Tablet and desktop: CONTINUE SHOPPING left; TOTAL and PAY right, on one row. */
+@media (min-width: 768px) {
+  .footer {
+    grid-template-columns: 250px 1fr 250px;
+    align-items: center;
+  }
+
+  .total {
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-end;
+    margin: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .continue {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .payBox {
+    grid-column: 3;
+    grid-row: 1;
+    position: relative;
+  }
+
+  .payNote {
+    position: absolute;
+    top: 100%;
+    margin-top: var(--space-2);
+  }
+}

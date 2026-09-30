@@ -60,7 +60,7 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 5. **Results and cart counts are real**, not the placeholders in the frames ("20 RESULTS" beside two products, "CART (9)" with one line).
 6. **The cart page has no bag icon** (two of three cart frames omit it).
 7. **The disabled add button states what is missing** ("Select a color"), instead of only being grey.
-8. **`PAY` is present but disabled and labeled**: checkout is outside the challenge.
+8. **`PAY` is present but disabled and labeled**: checkout is outside the challenge. It keeps the design's black look, uses `aria-disabled`, and a small note under it says "Payment is not available in this demo."
 9. **The clear-search "x" has an accessible name.**
 10. **States the design omits** (loading, no results, error, not found) are ours; see `information-architecture.md`.
 
@@ -74,5 +74,7 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 18. **A confirmation line appears under `AÑADIR`** after adding ("Added to your cart: ..."); the design shows only the bag count changing.
 19. **A missing specification shows "—"** (read as "Not available") instead of an empty cell.
 20. **The chosen storage segment and color swatch get a black outline**; unchosen ones a light grey border.
+21. **The empty cart says "Your cart is empty."** above CONTINUE SHOPPING; the design shows only the heading and the button.
+22. **The cart footer sits at the bottom of the window** (as in the frames) using the viewport height, and moves below the lines when they are taller than the window.
 
 Every new deviation is added to this list in the same commit that introduces it.

@@ -73,6 +73,18 @@ export const copy = {
   },
   cart: {
     heading: (count: number) => `CART (${count})`,
+    empty: 'Your cart is empty.',
+    lineSpecs: (storage: string, color: string) => `${storage} | ${color}`,
+    image: (brand: string, name: string, color: string) => `${brand} ${name}, ${color}`,
+    remove: 'Eliminar',
+    removeLabel: (name: string, storage: string, color: string) =>
+      `Eliminar ${name}, ${storage}, ${color}`,
+    removed: (name: string, storage: string, color: string) =>
+      `Removed from your cart: ${name}, ${storage}, ${color}.`,
+    total: 'TOTAL',
+    continueShopping: 'CONTINUE SHOPPING',
+    pay: 'PAY',
+    payUnavailable: 'Payment is not available in this demo.',
   },
   notFound: {
     heading: 'Page not found',

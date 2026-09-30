@@ -1,3 +1,8 @@
 packages:
   - "apps/*"
   - "packages/*"
+
+# Dependency install scripts are denied unless listed here.
+# esbuild (via tsx) ships its binary as an optional dependency, so its postinstall is not needed.
+allowBuilds:
+  esbuild: false

@@ -3,7 +3,7 @@
   "agentGuidance": false,
   "tasks": {
     "typecheck": { "dependsOn": ["^typecheck"] },
-    "test": { "outputs": ["coverage/**"] },
+    "test": { "outputs": [] },
     "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] },
     "dev": { "cache": false, "persistent": true }
   }

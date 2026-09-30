@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/mocharc.json",
+  "node-option": ["import=tsx"],
+  "spec": ["test/**/*.test.ts"],
+  "reporter": "spec"
+}

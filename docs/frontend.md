@@ -1,6 +1,6 @@
 # Frontend (React 19)
 
-> Status: foundation (chunk 4) and the product list with search (chunk 5) are implemented. Detail and cart pages get their content in chunks 6-7.
+> Status: all three pages are implemented (chunks 4-7): list with search, detail, cart. Next: quality pass (chunk 8) and SSR (chunk 9).
 
 Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them.
 
@@ -73,7 +73,7 @@ test/             renderApp, builders, test doubles, Jest setup (outside the lay
 - The detail hook scopes its state to the product id, so moving to a similar phone shows the loading state at once instead of the previous phone.
 - Focus after navigation: if the new page is still loading, focus waits on `<main>` and moves to the h1 when it appears (`ui/heading-focus.tsx`).
 - After adding to the cart the user gets confirmation, announced to assistive technology.
-- Removing a cart line moves focus somewhere sensible (next line, or the continue button when empty).
+- Removing a cart line moves focus to the next line's `Eliminar`, else the previous one, else `CONTINUE SHOPPING` when the cart is empty; the removal is announced in a polite live region. Each `Eliminar` has an accessible name that starts with the visible word and names the line (`Eliminar Galaxy S24 Ultra, 512 GB, Negro`).
 - Search: skeletons while loading, a clear "No results" message, a retry action on errors.
 
 ## SSR-safety

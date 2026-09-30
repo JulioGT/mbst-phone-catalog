@@ -30,7 +30,7 @@ Build a phone catalog web app for the Inditex/Zara frontend challenge: list with
 | Figma could not be inspected programmatically | Values isolated in `tokens.css`; deviations documented; replace estimates with Inspect values |
 | SSR hydration mismatches (cart count, browser-only APIs) | SSR-safety rules from the first web chunk; hydration test in chunk 9 |
 | Console warnings (for example duplicate React keys) | Jest guard fails on `console.error`/`console.warn`; de-duplication at the adapter |
-| Tooling drift across Node versions | CI matrix on Node 18 and 22; ADR 0008 |
+| Tooling drift across Node versions | CI matrix on Node 20 and 22; ADRs 0008 and 0010 |
 
 ## Delivery plan and estimate
 
@@ -41,7 +41,7 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 | 1 | Foundation: monorepo, tooling, architecture guardrail, docs and agent files | 3-4 h | delivered |
 | 2 | BFF core: domain, use cases, ports, in-memory adapters | 4-6 h | delivered |
 | 3 | BFF edges: contracts (DTOs + schemas), upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | delivered |
-| 4 | Web foundation: Rsbuild dev/prod, tokens, layout, routing, cart domain and context, storage adapter, test setup | 5-7 h | planned |
+| 4 | Web foundation: Rsbuild dev/prod, tokens, layout, routing, cart domain and context, storage adapter, test setup | 5-7 h | delivered |
 | 5 | List and search | 5-7 h | planned |
 | 6 | Detail | 6-8 h | planned |
 | 7 | Cart | 3-4 h | planned |

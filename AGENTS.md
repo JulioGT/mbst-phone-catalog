@@ -13,8 +13,9 @@ Work is delivered in chunks (table in `docs/technical-proposal.md`). Implement o
 ## Commands
 
 ```bash
-pnpm install        # Node >= 18.18, pnpm 12 via `npm install -g pnpm@12.8.1`
-pnpm dev            # BFF on http://localhost:3000 (needs .env; Node >= 20.6 to load it)
+pnpm install        # Node >= 20.19 (ADR 0010), pnpm 12 via `npm install -g pnpm@12.8.1`
+pnpm dev            # web on http://localhost:3001 (unminified) + BFF on :3000 (needs .env)
+pnpm build          # production build: minified, hashed assets in apps/web/dist
 pnpm verify         # lint + architecture check + architecture tests + typecheck + tests. Must pass before every commit.
 pnpm lint           # Biome check (lint + format + import order)
 pnpm lint:fix       # apply safe fixes
@@ -25,7 +26,7 @@ pnpm test           # unit and integration tests in every workspace (BFF: Mocha 
 pnpm check:contract # manual: checks the live catalog API against our schemas (needs .env)
 ```
 
-`build` and `start` scripts are added by the chunk that introduces them; this file is updated in the same commit.
+`pnpm --filter @mbst/web preview` serves the production build on :3001 (run the BFF alongside for `/api`). A single-process `start` arrives with SSR (chunk 9); this file is updated in the same commit.
 
 ## Repo map
 

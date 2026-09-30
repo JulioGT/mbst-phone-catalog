@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web-dev",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@mbst/web", "dev"],
+      "port": 3001
+    },
+    {
+      "name": "web-preview",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@mbst/web", "preview"],
+      "port": 3001
+    }
+  ]
+}

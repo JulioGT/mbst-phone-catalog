@@ -16,7 +16,7 @@ Tests describe behavior, not implementation. A good test name reads as a require
 
 The end-to-end suite stubs the **upstream** API (behind the BFF), not the browser's requests: once pages are server-rendered, the server makes the data calls and browser-side interception cannot see them.
 
-BFF tests live in `apps/bff/test/` (mirroring `src/`) and run with `pnpm test`; web tests are co-located with components. Shared test data comes from builders such as `aProductSummary()` in `apps/bff/test/builders.ts`.
+BFF tests live in `apps/bff/test/` (mirroring `src/`) and run with `pnpm test`. Web tests are co-located (`*.test.ts(x)` next to the code); shared helpers and test doubles (`renderApp`, `aCartLine`, `InMemoryCartStorage`) live in `apps/web/test/`, outside the layers. A domain test may import only the domain, so it defines its own builders. Jest runs in `test/jsdom-environment.cjs`, a jsdom environment that lends Node's standard `Request`, `Response`, `fetch`, `AbortController` and `TextEncoder`, which real browsers have and jsdom lacks. Shared test data comes from builders such as `aProductSummary()` in `apps/bff/test/builders.ts`.
 
 ## Rules
 
@@ -33,7 +33,7 @@ BFF tests live in `apps/bff/test/` (mirroring `src/`) and run with `pnpm test`; 
 
 - The Jest setup fails any test that calls `console.error` or `console.warn` (the challenge requires a clean console). Introduced in chunk 4.
 - Every component test includes a `jest-axe` assertion.
-- CI runs `pnpm verify` on Node 18 and Node 22.
+- CI runs `pnpm verify` on Node 20 and Node 22.
 
 ## Coverage
 

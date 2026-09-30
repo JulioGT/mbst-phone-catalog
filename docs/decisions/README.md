@@ -13,3 +13,4 @@ Short records of decisions that are costly to reverse, written when the decision
 | 0007 | Preselect options when only one exists |
 | 0008 | Pin TypeScript 5.9 and dependency-cruiser 16 |
 | 0009 | Planned runtime dependencies |
+| 0010 | Raise the minimum Node version to 20.19 |

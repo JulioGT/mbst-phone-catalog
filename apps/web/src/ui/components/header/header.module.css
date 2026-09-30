@@ -1,0 +1,30 @@
+.header {
+  padding: 0 var(--page-gutter);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+}
+
+/* Text stand-in for the MBST logo until the SVG export is available. */
+.logo {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.06em;
+  text-decoration: none;
+}
+
+.cart {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  /* 44px touch target (WCAG 2.5.5) around a small icon. */
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: flex-end;
+  font-size: var(--font-size-md);
+  text-decoration: none;
+}

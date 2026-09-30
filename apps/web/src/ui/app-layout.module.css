@@ -1,0 +1,22 @@
+.main {
+  padding: 0 var(--page-gutter) var(--space-12);
+}
+
+.main:focus {
+  outline: none;
+}
+
+/* Visible only when focused with the keyboard (first Tab on the page). */
+.skipLink {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-action);
+  color: var(--color-action-text);
+  transform: translateY(-200%);
+}
+
+.skipLink:focus {
+  transform: none;
+}

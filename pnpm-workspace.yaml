@@ -3,6 +3,11 @@ packages:
   - "packages/*"
 
 # Dependency install scripts are denied unless listed here.
-# esbuild (via tsx) ships its binary as an optional dependency, so its postinstall is not needed.
+# Each package below ships prebuilt binaries as optional dependencies and works
+# without its install script (checked when it was added), so the script is denied.
 allowBuilds:
+  '@parcel/watcher': false
+  '@swc/core': false
   esbuild: false
+  unrs-resolver: false
+

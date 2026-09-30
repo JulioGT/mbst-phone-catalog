@@ -80,7 +80,7 @@ A tiny `Logger` port with a JSON-line adapter writing to stdout. `console.*` is 
 - Responses set conservative headers (`helmet`), and no CORS is enabled because the browser only calls its own origin.
 - Input from the query string is validated before it is forwarded upstream.
 - `helmet`'s default Content-Security-Policy allows images only from the BFF's own origin. When the BFF serves the web app (chunk 4), `img-src` must also allow the catalog's image host.
-- `pnpm dev` loads `.env` with Node's `--env-file` flag, which needs Node 20.6 or later. On Node 18, export the variables in the shell instead. Production hosts (Render) set them directly.
+- `pnpm dev` loads the root `.env` with Node's `--env-file` flag. Production hosts (Render) set the variables directly.
 
 ## Testing
 

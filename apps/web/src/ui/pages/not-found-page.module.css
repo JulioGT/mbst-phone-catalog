@@ -1,0 +1,6 @@
+.page {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+  padding-top: var(--space-12);
+}

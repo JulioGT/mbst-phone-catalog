@@ -1,5 +1,7 @@
 # Deployment (Render)
 
+**Live:** https://mbst-phone-catalog.onrender.com (first deployed 2026-09-30; checked in a browser: search, detail, add to cart, cart, direct links, images, empty console).
+
 The app runs as **one Node process**: the BFF serves the built web app (`apps/web/dist`), its assets and `/api`. [Render](https://render.com) hosts it as a web service described in [`render.yaml`](../render.yaml) (a "Blueprint": the service's settings as code, reviewed in git).
 
 ## How it runs

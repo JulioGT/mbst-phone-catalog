@@ -110,6 +110,7 @@ export function ProductPurchase({ product }: { readonly product: ProductDetail }
             aria-disabled={line === null}
             aria-describedby={hint === null ? undefined : hintId}
             onClick={handleAdd}
+            lang="es"
           >
             {copy.detail.addToCart}
           </button>

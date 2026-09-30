@@ -2,7 +2,7 @@
 
 > Status: all three pages are implemented (chunks 4-7): list with search, detail, cart. Next: quality pass (chunk 8) and SSR (chunk 9).
 
-Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them.
+Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them (with the same `/api` proxy). `apps/web/index.html` is the page template (language, description, theme color); `public/favicon.svg` is injected by Rsbuild.
 
 ## Stack
 
@@ -53,6 +53,8 @@ test/             renderApp, builders, test doubles, Jest setup (outside the lay
 - Inline styles only for genuinely dynamic values (a color swatch's `hexCode`), passed through a CSS variable.
 
 ## Accessibility checklist (applies to every interactive component)
+
+- Spanish text inside the English page (`AÑADIR`, `Eliminar`, the catalog's descriptions) carries `lang="es"`. The document is `lang="en"` (set in `apps/web/index.html`).
 
 - Everything reachable and operable by keyboard; visible `:focus-visible` outline.
 - Controls have accessible names. Icon-only controls (cart, clear search, back) have `aria-label`.

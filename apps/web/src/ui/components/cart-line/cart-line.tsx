@@ -32,6 +32,7 @@ export function CartLine({ line, onRemove, removeButtonRef }: CartLineProps) {
           className={styles.remove}
           aria-label={copy.cart.removeLabel(line.name, line.storage, line.colorName)}
           onClick={() => onRemove(line)}
+          lang="es"
         >
           {copy.cart.remove}
         </button>

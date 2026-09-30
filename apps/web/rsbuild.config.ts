@@ -12,7 +12,7 @@ export default defineConfig({
     entry: { index: './src/main.tsx' },
   },
   html: {
-    title: 'Phones | MBST',
+    template: './index.html',
   },
   server: {
     port: 3001,

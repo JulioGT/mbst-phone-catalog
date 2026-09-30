@@ -17,6 +17,7 @@ pnpm install        # Node >= 20.19 (ADR 0010), pnpm 12 via `npm install -g pnpm
 pnpm dev            # web on http://localhost:3001 (unminified) + BFF on :3000 (needs .env)
 pnpm build          # production build: minified, hashed assets in apps/web/dist
 pnpm preview        # build, then serve the production assets on :3001 with the BFF on :3000
+pnpm start          # production as deployed: one process on :3000 serving pages, assets and /api (run pnpm build first)
 pnpm verify         # lint + architecture check + architecture tests + typecheck + tests. Must pass before every commit.
 pnpm lint           # Biome check (lint + format + import order)
 pnpm lint:fix       # apply safe fixes (the pre-commit hook blocks staged files that need them)
@@ -27,7 +28,7 @@ pnpm test           # unit and integration tests in every workspace (BFF: Mocha 
 pnpm check:contract # manual: checks the live catalog API against our schemas (needs .env)
 ```
 
-A single-process `start` (the BFF serving the built app) arrives with SSR (chunk 9); this file is updated in the same commit.
+Deployment (Render, `render.yaml`) is described in `docs/deployment.md`; this file is updated in the same commit.
 
 ## Repo map
 

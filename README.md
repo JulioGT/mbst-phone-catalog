@@ -29,6 +29,7 @@ The API key is deliberately **not** in the repository. It is only read by the BF
 |---|---|---|---|
 | Development | `pnpm dev` | http://localhost:3001 | Unminified assets with source maps and hot reload (Rsbuild), BFF on :3000 with auto-restart |
 | Production | `pnpm preview` | http://localhost:3001 | Builds first, then serves **concatenated, minified, content-hashed** assets, with the BFF on :3000 |
+| Production, as deployed | `pnpm build && pnpm start` | http://localhost:3000 | One process: the BFF serves the pages, the assets and `/api` ([deployment](docs/deployment.md)) |
 
 In both modes the browser only calls `/api/*` on its own origin; Rsbuild proxies it to the BFF.
 
@@ -39,6 +40,7 @@ In both modes the browser only calls `/api/*` on its own origin; Rsbuild proxies
 | `pnpm dev` | Web app and BFF in watch mode |
 | `pnpm build` | Production build of the web app (`apps/web/dist`) |
 | `pnpm preview` | `build`, then serve it with the BFF |
+| `pnpm start` | Run the built app as in production (one process on :3000) |
 | `pnpm test` | Unit and integration tests in every workspace |
 | `pnpm verify` | Lint + format check, architecture rules, architecture tests, typecheck, tests. CI runs it on Node 20 and 22, plus `pnpm build` |
 | `pnpm lint:fix` | Apply safe lint and format fixes (Biome) |
@@ -173,7 +175,7 @@ The work was delivered in chunks ([`docs/technical-proposal.md`](docs/technical-
 
 - **Server-side rendering** of the list and detail pages is the next planned step. The code is already SSR-safe: no browser APIs at module level, the cart is read after mount, and the routes and data access go through replaceable ports.
 - **End-to-end tests (Cypress)** against the BFF with a stubbed remote API are planned after SSR.
-- **Deployment** (Render) is planned; the BFF already handles `SIGTERM` and exposes `/health`.
+- **Deployment** on Render is described as code in [`render.yaml`](render.yaml); see [`docs/deployment.md`](docs/deployment.md).
 - **Design values are estimates.** The Figma file could not be inspected, so colors, spacing and type sizes come from screenshots and live in `tokens.css`. The MBST logo is a text stand-in.
 - **Cart prices are snapshots.** If the catalog price changes after adding, the cart keeps the old price (by design, [ADR 0006](docs/decisions/0006-money-and-cart-snapshots.md)).
 - **Checkout is out of scope**: `PAY` is visible but disabled, with an explanation.

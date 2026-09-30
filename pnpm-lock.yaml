@@ -215,6 +215,9 @@ importers:
       chai:
         specifier: 6.2.2
         version: 6.2.2
+      esbuild:
+        specifier: 0.28.2
+        version: 0.28.2
       mocha:
         specifier: 11.8.0
         version: 11.8.0

@@ -15,6 +15,10 @@ const configSchema = z.object({
   CATALOG_API_TIMEOUT_MS: z.coerce.number().int().min(1).max(60_000).default(15_000),
   PORT: z.coerce.number().int().min(0).max(65_535).default(3000),
   FEATURE_FLAGS: z.string().default(''),
+  SERVE_WEB_APP: z
+    .enum(['true', 'false'], { error: 'must be "true" or "false"' })
+    .default('false')
+    .transform((value) => value === 'true'),
 });
 
 export interface Config {
@@ -23,6 +27,10 @@ export interface Config {
   readonly catalogApiTimeoutMs: number;
   readonly port: number;
   readonly featureFlags: string;
+  /** Serve the built web app (apps/web/dist) from this process, as in production. */
+  readonly serveWebApp: boolean;
+  /** Origin of the catalog host, whose product images the pages load. */
+  readonly catalogImageOrigin: string;
 }
 
 export class InvalidConfigError extends Error {
@@ -46,5 +54,7 @@ export function loadConfig(env: Readonly<Record<string, string | undefined>>): C
     catalogApiTimeoutMs: config.CATALOG_API_TIMEOUT_MS,
     port: config.PORT,
     featureFlags: config.FEATURE_FLAGS,
+    serveWebApp: config.SERVE_WEB_APP,
+    catalogImageOrigin: new URL(config.CATALOG_API_BASE_URL).origin,
   };
 }

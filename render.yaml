@@ -1,0 +1,30 @@
+# Render Blueprint (https://render.com/docs/blueprint-spec): one Node web service.
+# The BFF serves the built web app, its assets and /api from a single process.
+# CATALOG_API_KEY is declared here without a value: it is entered once in the
+# Render dashboard and never stored in the repository.
+services:
+  - type: web
+    name: mbst-phone-catalog
+    runtime: node
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: npm install -g pnpm@12.8.1 && pnpm install --frozen-lockfile && pnpm build
+    startCommand: node --enable-source-maps apps/bff/dist/main.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SERVE_WEB_APP
+        value: "true"
+      - key: CATALOG_API_BASE_URL
+        value: https://prueba-tecnica-api-tienda-moviles.onrender.com
+      - key: CATALOG_API_KEY
+        sync: false
+      - key: CATALOG_API_TIMEOUT_MS
+        value: "15000"
+      - key: FEATURE_FLAGS
+        value: similar-products
+      # The pre-commit hook is for developers; a build server has no use for it.
+      - key: SKIP_INSTALL_SIMPLE_GIT_HOOKS
+        value: "1"

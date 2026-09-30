@@ -41,7 +41,7 @@ No global percentage gate: numbers reward the wrong behavior. Instead, review as
 
 ## Manual quality checks (chunk 8, 2026-09-30)
 
-Run against the **production** build (`pnpm build`, then `pnpm --filter @mbst/web preview` with the BFF on the live API). Repeat before a release.
+Run against the **production** build (`pnpm preview`, with the BFF on the live API). Repeat before a release.
 
 | Check | How | Result |
 |---|---|---|

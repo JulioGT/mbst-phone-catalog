@@ -10,7 +10,7 @@ React 19, TypeScript (strict), Rsbuild, Express BFF, CSS Modules with CSS custom
 
 ## Getting started
 
-Requirements: Node 18.18 or newer and pnpm (`corepack enable` picks up the pinned version).
+Requirements: Node 18.18 or newer and pnpm 12 (`npm install -g pnpm@12.8.1`; pnpm then follows the version pinned in `package.json`).
 
 ```bash
 pnpm install

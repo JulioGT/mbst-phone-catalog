@@ -1,0 +1,25 @@
+node_modules/
+dist/
+coverage/
+.turbo/
+.rsbuild/
+*.tsbuildinfo
+*.log
+
+# Secrets: never commit real values (see .env.example)
+.env
+.env.*
+!.env.example
+
+# Private context for AI agents (challenge PDF with the API key, Figma screenshots)
+.handoff/
+
+# Cypress artifacts
+apps/e2e/cypress/videos/
+apps/e2e/cypress/screenshots/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json

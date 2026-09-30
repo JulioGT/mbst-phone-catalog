@@ -1,0 +1,67 @@
+# Design system
+
+Source of truth: the Figma file supplied with the challenge (desktop, tablet and mobile frames). It could not be opened programmatically, so this document is built from screenshots. **Values marked "estimated" must be replaced with the numbers from Figma's Inspect panel**; because everything goes through `tokens.css`, that is a one-file change.
+
+## Principles
+
+Monochrome, editorial, dense typography, thin borders, no shadows or rounded corners. Uppercase for labels, names and brands. Color is used only for the single destructive action (`Eliminar`).
+
+## Tokens *(planned: `apps/web/src/ui/styles/tokens.css`)*
+
+Two tiers only: primitives, then semantic names that components use.
+
+| Token | Value | Source |
+|---|---|---|
+| `--font-family-base` | `Helvetica, Arial, sans-serif` | challenge statement |
+| `--color-black` | `#000000` | estimated |
+| `--color-ink` (primary button) | `#151515` | estimated |
+| `--color-white` | `#ffffff` | estimated |
+| `--color-grey-100` (disabled button) | `#eeeeee` | estimated |
+| `--color-grey-600` (muted text) | `#6b6b6b` | estimated, chosen for AA contrast |
+| `--color-border` | `#4d4d4d` | estimated |
+| `--color-danger` (`Eliminar`) | `#d0021b` | estimated |
+| Semantic: `--color-text`, `--color-text-muted`, `--color-border`, `--color-action`, `--color-action-text`, `--color-danger` | map to the above | |
+| Spacing | 4px scale: `--space-1` (4px) ... `--space-12` (48px) | estimated |
+| Type sizes | `--font-size-xs`, `-sm`, `-md`, `-lg` | estimated |
+
+## Breakpoints
+
+Custom properties cannot be used inside media queries, so these are literal values, listed here as the single reference.
+
+| Name | Range | Grid columns | Detail layout |
+|---|---|---|---|
+| Mobile | < 768px | 1 | image above buying options |
+| Tablet | 768px to 1199px | 2 | image left, buying options right |
+| Desktop | >= 1200px | 5 | same as tablet, wider |
+
+The tablet frame is 834px wide. The 768px and 1200px boundaries are our inference; the phone frame width is not in the screenshots.
+
+## Component inventory
+
+| Component | States to implement |
+|---|---|
+| Header (logo, cart bag + count) | bag outline at 0, bag filled above 0; hidden bag on the cart page |
+| Search box | empty, typing, with clear button, focused |
+| Product card | default, hover, focus, loading skeleton |
+| Storage selector | unselected, selected, focus, single option (preselected) |
+| Color selector | unselected, selected (name shown below), focus, near-white swatch |
+| Add button | disabled (with reason), enabled, focus |
+| Specifications table | fixed rows |
+| Similar products carousel | horizontal scroll with progress indicator |
+| Cart line | default, remove |
+| Buttons | primary (dark), secondary (outlined), text (danger) |
+
+## Deviations from the design (deliberate)
+
+1. **Muted text is darker** than in the frames so brand labels reach 4.5:1 contrast.
+2. **Near-white swatches get a visible border** (for example `Lavanda #E6E6FA`), otherwise they disappear on white.
+3. **Focus is always visible** (`:focus-visible` outline); the design shows none.
+4. **Minimum text size 12px.** If Inspect shows smaller sizes, we raise them.
+5. **Results and cart counts are real**, not the placeholders in the frames ("20 RESULTS" beside two products, "CART (9)" with one line).
+6. **The cart page has no bag icon** (two of three cart frames omit it).
+7. **The disabled add button states what is missing** ("Select a color"), instead of only being grey.
+8. **`PAY` is present but disabled and labeled**: checkout is outside the challenge.
+9. **The clear-search "x" has an accessible name.**
+10. **States the design omits** (loading, no results, error, not found) are ours; see `information-architecture.md`.
+
+Every new deviation is added to this list in the same commit that introduces it.

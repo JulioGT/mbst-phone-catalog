@@ -1,6 +1,6 @@
 # BFF (Express)
 
-> Status: chunk 2 delivered the core (domain, ports, use cases, in-memory adapters). The HTTP adapter, routes, configuration and logging described below are chunk 3.
+> Status: implemented (chunks 2 and 3). Run it with `pnpm dev` (needs `.env`); check the live API with `pnpm check:contract`.
 
 The BFF exists for three reasons: keep `x-api-key` out of the browser, give the UI a clean and stable API, and contain the remote API's quirks in one place.
 
@@ -12,20 +12,33 @@ The BFF exists for three reasons: keep `x-api-key` out of the browser, give the 
 | `GET /api/products/:id` | none | `200` `ProductDetailDto` | `404` unknown id, `502`/`504` upstream problem |
 | `GET /health` | none | `200` `{ status: "ok" }` | none |
 
-Error bodies always have the shape `{ "error": string, "message": string }` (the same shape the upstream API uses for its 404).
+Error bodies always have the shape `{ "error": ApiErrorCode, "message": string }` (the same shape the upstream API uses). Codes and statuses:
+
+| Code | Status | When |
+|---|---|---|
+| `INVALID_QUERY` | 400 | `limit` not a whole number from 1 to 50, `search` repeated or longer than 100 characters |
+| `NOT_FOUND` | 404 | unknown product id, or unknown `/api/*` route |
+| `UPSTREAM_TIMEOUT` | 504 | the remote API did not answer within `CATALOG_API_TIMEOUT_MS` |
+| `UPSTREAM_ERROR` | 502 | the remote API failed, rejected our key (logged as an error) or sent a payload that breaks our schemas |
+| `INTERNAL_ERROR` | 500 | anything unexpected (logged) |
+
+Wire types and schemas live in `packages/contracts` (`ProductSummaryDto`, `ProductDetailDto`, `ApiErrorDto`, `API_PATHS`). Prices travel as integer cents (`basePriceInCents`, `priceInCents`).
 
 ## Layout (`apps/bff/src`)
 
 ```
 domain/           ProductSummary, ProductDetail, ColorOption, StorageOption, errors
 application/
-  ports/          ProductCatalogPort, FeatureFlagsPort
   list-products.ts, get-product-detail.ts
+  ports/          ProductCatalogPort, FeatureFlagsPort, Logger
 infrastructure/
-  catalog/        HTTP adapter for the remote API (+ in-memory adapter for tests)
-  flags/          env-based adapter
-  http/           Express app, routes, DTO mapping, error middleware
+  catalog/        HTTP adapter + upstream schemas (+ in-memory adapter for tests)
+  config/         loadConfig: validates the environment
+  flags/          EnvFeatureFlags (+ in-memory adapter for tests)
+  http/           createApp (Express), DTO mapping, error mapping
+  logging/        JSON-line logger (+ in-memory logger for tests)
 main.ts           composition root: reads config, builds adapters, starts the server
+scripts/          check-contract.ts (manual check against the live API)
 ```
 
 Tests live in `apps/bff/test/`, mirroring `src/`. They are kept out of `src/` because a domain test imports Chai, which the `domain-is-pure` rule forbids inside `src/domain/`.
@@ -66,6 +79,8 @@ A tiny `Logger` port with a JSON-line adapter writing to stdout. `console.*` is 
 - The API key exists only in the BFF process environment.
 - Responses set conservative headers (`helmet`), and no CORS is enabled because the browser only calls its own origin.
 - Input from the query string is validated before it is forwarded upstream.
+- `helmet`'s default Content-Security-Policy allows images only from the BFF's own origin. When the BFF serves the web app (chunk 4), `img-src` must also allow the catalog's image host.
+- `pnpm dev` loads `.env` with Node's `--env-file` flag, which needs Node 20.6 or later. On Node 18, export the variables in the shell instead. Production hosts (Render) set them directly.
 
 ## Testing
 

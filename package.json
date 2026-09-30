@@ -9,6 +9,7 @@
     "node": ">=18.18"
   },
   "scripts": {
+    "dev": "turbo run dev",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
@@ -16,6 +17,7 @@
     "test": "turbo run test",
     "check:arch": "depcruise apps packages --config .dependency-cruiser.cjs",
     "test:arch": "node --test tools/architecture/architecture.test.mjs",
+    "check:contract": "pnpm --filter @mbst/bff check:contract",
     "verify": "pnpm lint && pnpm check:arch && pnpm test:arch && pnpm typecheck && pnpm test"
   },
   "devDependencies": {

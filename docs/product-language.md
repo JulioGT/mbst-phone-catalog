@@ -11,7 +11,7 @@ One vocabulary for the design, the API, the code, the tests and the copy. If a w
 | **Product summary** | The short form used in the grid and in similar items: id, brand, name, base price, image | `ProductSummary` | card |
 | **Product detail** | The full form: description, specs, color options, storage options, similar products | `ProductDetail` | detail page |
 | **Brand** | The manufacturer, shown in caps | `brand` | `APPLE` |
-| **Base price** | The lowest price, shown before any storage is chosen | `basePrice` | `From 1099 EUR` |
+| **Base price** | The catalog's headline price for a product, shown on cards. Usually, but not always, the cheapest storage option (`api-contract.md`) | `basePrice` (wire: `basePriceInCents`) | `From 1099 EUR` |
 | **Storage option** | A capacity with its own absolute price | `StorageOption { capacity, price }` | `256 GB` |
 | **Color option** | A named color with a swatch color and its own image | `ColorOption { name, hexCode, imageUrl }` | swatch + name |
 | **Selection** | The storage and color a shopper has chosen so far (either may be missing) | `ProductSelection` | none |

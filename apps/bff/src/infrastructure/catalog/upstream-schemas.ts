@@ -1,6 +1,8 @@
-// Schemas of the remote catalog API as observed (docs/api-contract.md).
-// Strict about what the app needs, lenient about what it does not: unknown
-// keys (such as `rating`, or `specs.storage` on one phone) are dropped.
+/**
+ * Schemas of the remote catalog API as observed (docs/api-contract.md).
+ * Strict about what the app needs, lenient about what it does not: unknown
+ * keys (such as `rating`, or `specs.storage` on one phone) are dropped.
+ */
 import { z } from 'zod';
 
 const euros = z.number().nonnegative();

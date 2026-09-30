@@ -1,7 +1,9 @@
-// Checks the live catalog API against what the BFF assumes (docs/api-contract.md).
-// Run manually with `pnpm check:contract`; CI never calls a third-party host.
-// Exits 1 when a payload breaks our schemas or the API rejects the key; the
-// other findings are observations that the adapter already handles.
+/**
+ * Checks the live catalog API against what the BFF assumes (docs/api-contract.md).
+ * Run manually with `pnpm check:contract`; CI never calls a third-party host.
+ * Exits 1 when a payload breaks our schemas or the API rejects the key; the
+ * other findings are observations that the adapter already handles.
+ */
 import {
   upstreamProductDetailSchema,
   upstreamProductListSchema,

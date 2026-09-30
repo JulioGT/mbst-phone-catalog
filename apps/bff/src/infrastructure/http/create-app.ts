@@ -1,13 +1,12 @@
 import { API_PATHS, type ApiErrorDto } from '@mbst/contracts';
 import express, { type ErrorRequestHandler, type Express, type Router } from 'express';
 import helmet from 'helmet';
-import { z } from 'zod';
 import type { GetProductDetail } from '../../application/get-product-detail';
 import type { ListProducts } from '../../application/list-products';
 import type { Logger } from '../../application/ports/logger';
-import { InvalidProductQueryError } from '../../domain/errors';
 import { toProductDetailDto, toProductSummaryDto } from './dto-mapping';
 import { toErrorResponse } from './error-response';
+import { parseListQuery } from './request-schemas';
 
 export interface AppDependencies {
   readonly listProducts: ListProducts;
@@ -15,35 +14,11 @@ export interface AppDependencies {
   readonly logger: Logger;
 }
 
-// Query strings arrive as strings, or as arrays when a key is repeated.
-// Shape is checked here; business ranges are checked by the use case.
-const listQuerySchema = z.object({
-  search: z.string().optional(),
-  limit: z
-    .string()
-    .regex(/^\d+$/)
-    .transform((value) => Number(value))
-    .optional(),
-});
-
 function productRoutes({ listProducts, getProductDetail }: AppDependencies): Router {
   const router = express.Router();
 
   router.get('/', async (request, response) => {
-    const query = listQuerySchema.safeParse(request.query);
-    if (!query.success) {
-      const field = query.error.issues[0]?.path[0] === 'limit' ? 'limit' : 'searchTerm';
-      throw new InvalidProductQueryError(
-        field,
-        field === 'limit'
-          ? 'limit must be a whole number.'
-          : 'search must be given at most once, as text.',
-      );
-    }
-    const products = await listProducts.execute({
-      searchTerm: query.data.search,
-      limit: query.data.limit,
-    });
+    const products = await listProducts.execute(parseListQuery(request.query));
     response.json(products.map(toProductSummaryDto));
   });
 

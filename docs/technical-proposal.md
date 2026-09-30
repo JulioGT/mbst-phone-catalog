@@ -45,7 +45,7 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 | 5 | List and search | 5-7 h | delivered |
 | 6 | Detail | 6-8 h | delivered |
 | 7 | Cart | 3-4 h | delivered |
-| 8 | Quality pass: accessibility audit, console guard review, responsive polish | 4-5 h | planned |
+| 8 | Quality pass: accessibility audit, console guard review, responsive polish | 4-5 h | delivered |
 | 9 | SSR for list and detail | 6-8 h | planned |
 | 10 | Cypress end-to-end | 3-4 h | planned |
 | 11 | README, final documentation, checklist (Docker if time allows) | 3-4 h | planned |

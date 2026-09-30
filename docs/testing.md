@@ -38,3 +38,16 @@ BFF tests live in `apps/bff/test/` (mirroring `src/`) and run with `pnpm test`. 
 ## Coverage
 
 No global percentage gate: numbers reward the wrong behavior. Instead, review asks: is every rule, state (loading, empty, error) and edge case (single option, corrupt storage, out-of-order responses) covered by a named test?
+
+## Manual quality checks (chunk 8, 2026-09-30)
+
+Run against the **production** build (`pnpm build`, then `pnpm --filter @mbst/web preview` with the BFF on the live API). Repeat before a release.
+
+| Check | How | Result |
+|---|---|---|
+| Console | Fresh tab; search, open a phone, add, open the cart, remove, unknown URL | No messages at all |
+| Production assets | `apps/web/dist` | Minified, content-hashed JS and CSS; one API call per search (StrictMode double effects are development-only) |
+| Accessibility engine | axe-core 4.10 in the real browser on list, no results, detail before/after choosing, cart, not found | 0 violations, including color contrast (which jsdom cannot measure) |
+| Keyboard | Tab through the detail page | Skip link, logo, cart, BACK, storage, color, AÑADIR, similar cards; focus always visible |
+| Responsive | Every page at 320, 767, 768, 1199, 1200 and 1920 px | No horizontal page scroll; grid switches at exactly 768 and 1200 |
+| Language of parts | Spanish text inside the English page (`AÑADIR`, `Eliminar`, API descriptions) | Marked `lang="es"` so screen readers pronounce it correctly (WCAG 3.1.2) |

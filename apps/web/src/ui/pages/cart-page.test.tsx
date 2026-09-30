@@ -48,6 +48,7 @@ describe('CartPage', () => {
     expect(first.getByRole('heading', { level: 2, name: 'Galaxy S24 Ultra' })).toBeInTheDocument();
     expect(first.getByText('512 GB | Violeta Titanium')).toBeInTheDocument();
     expect(first.getByText('1199 EUR')).toBeInTheDocument();
+    expect(first.getByRole('button', { name: /^Eliminar/ })).toHaveAttribute('lang', 'es');
     expect(screen.getByText('TOTAL').parentElement).toHaveTextContent('2397,42 EUR');
     await waitFor(() => expect(document.title).toBe('Cart (3) | MBST'));
   });

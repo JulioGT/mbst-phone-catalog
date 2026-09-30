@@ -137,6 +137,8 @@ describe('ProductDetailPage', () => {
     expect(within(table).getByRole('row', { name: /SCREEN REFRESH RATE/ })).toHaveTextContent(
       '120 Hz',
     );
+    expect(within(table).getByText(/gama alta/)).toHaveAttribute('lang', 'es');
+    expect(addButton()).toHaveAttribute('lang', 'es');
   });
 
   it('marks a missing specification instead of leaving it blank', async () => {

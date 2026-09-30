@@ -1,0 +1,80 @@
+{
+  "id": "MTE-EDGE50PRO",
+  "brand": "Motorola",
+  "name": "edge 50 Pro",
+  "description": "Más allá de los límites, este móvil Motorola edge 50 Pro dispone de un diseño elegante y resistente al agua que cabe fácilmente en la palma de la mano y se adapta perfectamente a tu estilo de vida.",
+  "basePrice": 649,
+  "rating": 3.8,
+  "specs": {
+    "screen": "6.67\" Super HD (1220p)",
+    "resolution": "2712 x 1220 pixels",
+    "processor": "Snapdragon® 7 Gen 3",
+    "mainCamera": "50 MP",
+    "selfieCamera": "50 MP",
+    "battery": "4500 mAh",
+    "os": "Android 14",
+    "screenRefreshRate": "No especificado"
+  },
+  "colorOptions": [
+    {
+      "name": "Negro",
+      "hexCode": "#000000",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/MTE-EDGE50PRO-negro.webp"
+    },
+    {
+      "name": "Lavanda",
+      "hexCode": "#E6E6FA",
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/MTE-EDGE50PRO-lavanda.webp"
+    }
+  ],
+  "storageOptions": [
+    {
+      "capacity": "512 GB",
+      "price": 649
+    }
+  ],
+  "similarProducts": [
+    {
+      "id": "SMG-A15",
+      "brand": "Samsung",
+      "name": "Galaxy A15 LTE",
+      "basePrice": 159,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/SMG-A15-azul.webp"
+    },
+    {
+      "id": "XMI-RN13P5G",
+      "brand": "Xiaomi",
+      "name": "Redmi Note 13 Pro 5G",
+      "basePrice": 399,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-RN13P5G-midnight-black.webp"
+    },
+    {
+      "id": "APL-IP13-128",
+      "brand": "Apple",
+      "name": "iPhone 13",
+      "basePrice": 619,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/APL-IP13-128-medianoche.webp"
+    },
+    {
+      "id": "XMI-13TPro",
+      "brand": "XIAOMI",
+      "name": "13T Pro",
+      "basePrice": 553.31,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/XMI-13TPro-negro.webp"
+    },
+    {
+      "id": "OPP-A60",
+      "brand": "OPPO",
+      "name": "A60",
+      "basePrice": 179,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/OPP-A60-midnight-purple.webp"
+    },
+    {
+      "id": "MTO-G24",
+      "brand": "Motorola",
+      "name": "g24",
+      "basePrice": 119,
+      "imageUrl": "http://prueba-tecnica-api-tienda-moviles.onrender.com/images/MTO-G24-gris.webp"
+    }
+  ]
+}

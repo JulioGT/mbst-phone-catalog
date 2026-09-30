@@ -19,5 +19,20 @@ module.exports = class BrowserLikeEnvironment extends TestEnvironment {
       TextEncoder,
       fetch,
     });
+
+    /**
+     * `<search>` (HTML 2023) is supported by every current browser but unknown
+     * to jsdom, so React would warn about it. Only that tag is taught here;
+     * any other unknown tag still triggers React's warning.
+     */
+    const { document } = this.global;
+    const createElement = document.createElement.bind(document);
+    document.createElement = (tagName, options) => {
+      const element = createElement(tagName, options);
+      if (String(tagName).toLowerCase() === 'search') {
+        Object.defineProperty(element, Symbol.toStringTag, { value: 'HTMLElement' });
+      }
+      return element;
+    };
   }
 };

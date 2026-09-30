@@ -1,6 +1,6 @@
 # Frontend (React 19)
 
-> Status: foundation implemented (chunk 4): Rsbuild dev/prod, routing, layout and header, tokens, cart domain and context, localStorage adapter, Jest setup. Pages get their content in chunks 5-7.
+> Status: foundation (chunk 4) and the product list with search (chunk 5) are implemented. Detail and cart pages get their content in chunks 6-7.
 
 Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them.
 
@@ -33,7 +33,8 @@ test/             renderApp, builders, test doubles, Jest setup (outside the lay
 - **Server data** (products) lives in hooks that call the `CatalogGateway` port. Loading, error and empty states are modeled explicitly, never inferred from `undefined`.
 - **Document title** is set with React 19's `<title>` element inside each page (hoisted into `<head>`; works with SSR too).
 - **Cart** lives in one Context. Cart rules are pure functions in `domain`; the Context holds state, calls those functions and persists through the `CartStorage` port. Stored data is validated when loaded, so corrupt `localStorage` cannot crash the app. The cart is read after mount and never saved before it is read, so a first render cannot wipe the stored cart. The storage key is `mbst.cart`, with a `version` field for future migrations.
-- **Search term** lives in the URL (`?q=samsung`), so Back/Forward and shared links behave. The input is debounced (about 300 ms). Each new request aborts the previous one with `AbortController`, so a slow old response can never overwrite a newer one.
+- **Search term** lives in the URL (`?q=samsung`), so Back/Forward and shared links behave. `SearchBox` keeps the text being typed in local state and commits the trimmed term to the URL after 300 ms without typing, on Enter, or when cleared (with `replace`, so typing does not add history steps). When the URL changes from outside, the box follows it without discarding text being typed. `useProductSearch` aborts the previous request with `AbortController` and ignores late answers, so a slow old response can never overwrite a newer one.
+- **Prices** are formatted only in `ui/format-price.ts`, Spanish style: `1219 EUR`, `553,31 EUR` (no decimals when whole, comma for cents).
 - **Detail selection** (storage, color) is local component state.
 
 ## Components

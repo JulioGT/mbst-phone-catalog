@@ -19,6 +19,19 @@ export const copy = {
   },
   list: {
     heading: 'MBST phones',
+    searchLabel: 'Search for a smartphone',
+    searchPlaceholder: 'Search for a smartphone...',
+    clearSearch: 'Clear search',
+    resultCount: (count: number) => `${count} ${count === 1 ? 'RESULT' : 'RESULTS'}`,
+    loading: 'Loading phones',
+    noResults: (searchTerm: string) => `No phones match "${searchTerm}".`,
+    noResultsHint: 'Try a brand such as Samsung, or part of a model name.',
+    error: 'We could not load the phones.',
+    retry: 'Try again',
+    productImage: (brand: string, name: string) => `${brand} ${name}`,
+  },
+  price: {
+    amount: (formatted: string) => `${formatted} EUR`,
   },
   detail: {
     heading: 'Phone',

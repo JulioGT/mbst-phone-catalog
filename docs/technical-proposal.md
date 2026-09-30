@@ -42,7 +42,7 @@ Effort is for one engineer familiar with the stack, excluding waiting time for r
 | 2 | BFF core: domain, use cases, ports, in-memory adapters | 4-6 h | delivered |
 | 3 | BFF edges: contracts (DTOs + schemas), upstream HTTP adapter, Zod validation, routes, error mapping, `check:contract` | 4-6 h | delivered |
 | 4 | Web foundation: Rsbuild dev/prod, tokens, layout, routing, cart domain and context, storage adapter, test setup | 5-7 h | delivered |
-| 5 | List and search | 5-7 h | planned |
+| 5 | List and search | 5-7 h | delivered |
 | 6 | Detail | 6-8 h | planned |
 | 7 | Cart | 3-4 h | planned |
 | 8 | Quality pass: accessibility audit, console guard review, responsive polish | 4-5 h | planned |

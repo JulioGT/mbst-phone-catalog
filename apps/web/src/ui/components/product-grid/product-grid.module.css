@@ -1,0 +1,58 @@
+/* Cells draw right and bottom borders; the grid draws top and left, so lines never double. */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-text);
+  border-left: 1px solid var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.cell {
+  border-right: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+}
+
+.skeleton {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-4);
+}
+
+.skeletonImage,
+.skeletonLine {
+  display: block;
+  background: var(--color-action-disabled);
+  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+.skeletonImage {
+  aspect-ratio: 312 / 257;
+  margin-bottom: var(--space-4);
+}
+
+.skeletonLine {
+  height: var(--font-size-xs);
+  width: 60%;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}

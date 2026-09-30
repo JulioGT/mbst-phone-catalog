@@ -67,7 +67,7 @@ Checked with `pnpm check:contract` (repeatable) and a one-off probe of every pro
 |---|---|---|
 | Does `search` match brand as well as name? | Yes, case-insensitive (`samsung`, `SAMSUNG`, `xiaomi` all work). A term with surrounding spaces matches nothing | The BFF trims the term before sending it |
 | Duplicates in the list? | Yes: `XMI-RN13P5G` appears twice, inside the first 20 | The adapter asks for `limit + 5`, drops repeats (first wins, logged as a warning) and returns `limit`, so the list still shows 20 phones |
-| Is `basePrice` the cheapest storage price? | **No**, on 5 of 23 (for example `SMG-S24U`: base 1329, storage 1229 / 1329 / 1529) | Passed through unchanged. How the detail page words the price before a storage is chosen is decided in chunk 6 |
+| Is `basePrice` the cheapest storage price? | **No**, on 5 of 23 (for example `SMG-S24U`: base 1329, storage 1229 / 1329 / 1529) | Passed through unchanged. Product owner decision (2026-09-30): the detail page shows `From {basePrice} EUR`, as designed, even where a cheaper storage exists |
 | Does every product have a color and a storage option? | Yes | Arrays are still not required to be non-empty; the UI handles empty |
 | Similar products: empty, missing, or self? | Never empty or missing, never the product itself, but duplicated on 1-2 products | Duplicates dropped; a missing list is treated as empty |
 | Are all spec attributes present? | No: `APL-IP13-128` has no `screenRefreshRate` and an extra `storage` key | Every spec attribute is optional; unknown keys are dropped |

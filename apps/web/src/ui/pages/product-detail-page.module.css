@@ -1,0 +1,44 @@
+.page {
+  display: grid;
+  gap: var(--space-12);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: var(--space-2);
+}
+
+@media (min-width: 1200px) {
+  .page {
+    gap: var(--space-25);
+  }
+}
+
+.skeleton {
+  aspect-ratio: 2 / 1;
+  background: var(--color-action-disabled);
+  animation: pulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.message {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.retry {
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--color-text);
+  background: var(--color-background);
+  color: var(--color-text);
+  font: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+}

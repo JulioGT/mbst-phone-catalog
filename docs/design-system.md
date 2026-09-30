@@ -71,5 +71,8 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 15. **The search underline thickens on focus**, which is the input's focus indicator.
 16. **The clear "x" has a 44x44px touch target** around the small icon.
 17. **Brand labels on cards are 12px** (the frames look smaller; deviation 4 sets our minimum).
+18. **A confirmation line appears under `AÑADIR`** after adding ("Added to your cart: ..."); the design shows only the bag count changing.
+19. **A missing specification shows "—"** (read as "Not available") instead of an empty cell.
+20. **The chosen storage segment and color swatch get a black outline**; unchosen ones a light grey border.
 
 Every new deviation is added to this list in the same commit that introduces it.

@@ -9,5 +9,6 @@ allowBuilds:
   '@parcel/watcher': false
   '@swc/core': false
   esbuild: false
+  simple-git-hooks: false
   unrs-resolver: false
 

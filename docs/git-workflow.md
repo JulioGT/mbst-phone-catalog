@@ -6,6 +6,8 @@ Trunk-based: `main` is always releasable. Work happens on short-lived branches n
 
 ## Commits
 
+A pre-commit hook runs `biome check` on the staged files and blocks the commit if any is badly formatted or breaks a lint rule (for example after an editor formatted it with Prettier). It is installed by `pnpm install` (root `prepare` script, `simple-git-hooks`). Fix with `pnpm lint:fix`, stage again and commit. The full `pnpm verify` still runs in CI.
+
 [Conventional Commits](https://www.conventionalcommits.org/): `<type>(<scope>): <summary>`.
 
 - Types: `feat`, `fix`, `refactor`, `test`, `docs`, `chore`, `ci`, `build`.

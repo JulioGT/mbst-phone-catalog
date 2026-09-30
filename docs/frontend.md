@@ -2,7 +2,7 @@
 
 > Status: all three pages are implemented (chunks 4-7): list with search, detail, cart. Next: quality pass (chunk 8) and SSR (chunk 9).
 
-Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm --filter @mbst/web preview` serves them (with the same `/api` proxy). `apps/web/index.html` is the page template (language, description, theme color); `public/favicon.svg` is injected by Rsbuild.
+Development: `pnpm dev` serves the app on http://localhost:3001 (unminified, with source maps and hot reload) and proxies `/api` to the BFF on :3000. Production: `pnpm build` writes minified, hashed bundles to `apps/web/dist`; `pnpm preview` builds and serves them together with the BFF (same `/api` proxy). `apps/web/index.html` is the page template (language, description, theme color); `public/favicon.svg` is injected by Rsbuild.
 
 ## Stack
 

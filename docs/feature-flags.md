@@ -1,6 +1,6 @@
 # Feature flags and experimentation
 
-> Status: the BFF side is implemented (`EnvFeatureFlags`, chunk 3); the UI side comes in chunk 6. The GrowthBook adapter is documented but not built (it is not part of the challenge).
+> Status: implemented end to end. The BFF evaluates the flag (`EnvFeatureFlags`, chunk 3) and the detail page shows the similar products section only when the payload has them (chunk 6). The GrowthBook adapter is documented but not built (it is not part of the challenge).
 
 ## Concept
 

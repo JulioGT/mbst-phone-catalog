@@ -1,0 +1,77 @@
+.purchase {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .purchase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-12);
+  }
+}
+
+.imageBox {
+  display: grid;
+  place-items: center;
+}
+
+.image {
+  width: 100%;
+  max-width: 510px;
+  height: auto;
+  aspect-ratio: 510 / 630;
+  object-fit: contain;
+}
+
+.options {
+  display: grid;
+  gap: var(--space-8);
+  max-width: 380px;
+}
+
+.titleBlock {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  text-transform: uppercase;
+}
+
+.price {
+  font-size: var(--font-size-md);
+}
+
+.add {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.addButton {
+  min-height: 48px;
+  border: 0;
+  background: var(--color-action);
+  color: var(--color-action-text);
+  font: inherit;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+.addButton[aria-disabled="true"] {
+  background: var(--color-action-disabled);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
+.hint,
+.confirmation {
+  font-size: var(--font-size-xs);
+}
+
+.hint {
+  color: var(--color-text-muted);
+}

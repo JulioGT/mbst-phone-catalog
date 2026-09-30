@@ -7,7 +7,7 @@ import { renderApp } from '../../test/render-app';
 describe('routes', () => {
   it.each([
     ['/', 'MBST phones', 'Phones | MBST'],
-    ['/products/SMG-S24U', 'Phone', 'Phone | MBST'],
+    ['/products/UNKNOWN', 'Product not found', 'Page not found | MBST'],
     ['/cart', 'CART (0)', 'Cart (0) | MBST'],
     ['/no/such/page', 'Page not found', 'Page not found | MBST'],
   ])('renders %s with one h1 and its own document title', async (path, heading, title) => {

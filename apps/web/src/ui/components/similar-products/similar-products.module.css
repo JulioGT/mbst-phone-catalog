@@ -1,0 +1,58 @@
+.section {
+  display: grid;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.heading {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+}
+
+.track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 80%);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--color-text);
+  border-left: 1px solid var(--color-text);
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .track {
+    grid-auto-columns: minmax(260px, 40%);
+  }
+}
+
+@media (min-width: 1200px) {
+  .track {
+    grid-auto-columns: minmax(260px, 20%);
+  }
+}
+
+.cell {
+  scroll-snap-align: start;
+  border-right: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+}
+
+.progress {
+  height: 1px;
+  background: var(--color-action-disabled);
+}
+
+/* Starts at a fifth of the width, so the bar is visible before any scroll. */
+.bar {
+  display: block;
+  height: 1px;
+  width: calc(20% + 80% * var(--progress));
+  background: var(--color-text);
+}

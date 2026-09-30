@@ -1,8 +1,14 @@
-import { API_PATHS, type ProductSummaryDto, productListDtoSchema } from '@mbst/contracts';
+import {
+  API_PATHS,
+  type ProductDetailDto,
+  type ProductSummaryDto,
+  productDetailDtoSchema,
+  productListDtoSchema,
+} from '@mbst/contracts';
 import type { CatalogGateway, SearchOptions } from '../application/ports/catalog-gateway';
 import { CatalogUnavailableError } from '../domain/errors';
 import { moneyFromCents } from '../domain/money';
-import type { ProductSummary } from '../domain/product';
+import type { ProductDetail, ProductSummary } from '../domain/product';
 
 export interface HttpCatalogGatewayOptions {
   /** Empty in the browser (same origin); an absolute URL when rendering on the server. */
@@ -40,7 +46,30 @@ export class HttpCatalogGateway implements CatalogGateway {
     return products.data.map(toProductSummary);
   }
 
-  async #getJson(path: string, signal: AbortSignal | undefined): Promise<unknown> {
+  async getProduct(
+    productId: string,
+    { signal }: SearchOptions = {},
+  ): Promise<ProductDetail | null> {
+    const body = await this.#getJson(API_PATHS.product(productId), signal, {
+      notFoundAsNull: true,
+    });
+    if (body === null) {
+      return null;
+    }
+    const product = productDetailDtoSchema.safeParse(body);
+    if (!product.success) {
+      throw new CatalogUnavailableError('The catalog answered in an unexpected format.', {
+        cause: product.error,
+      });
+    }
+    return toProductDetail(product.data);
+  }
+
+  async #getJson(
+    path: string,
+    signal: AbortSignal | undefined,
+    { notFoundAsNull = false } = {},
+  ): Promise<unknown> {
     let response: Response;
     try {
       response = await this.#fetch(`${this.#baseUrl}${path}`, {
@@ -52,6 +81,9 @@ export class HttpCatalogGateway implements CatalogGateway {
         throw signal.reason;
       }
       throw new CatalogUnavailableError('The catalog could not be reached.', { cause: error });
+    }
+    if (response.status === 404 && notFoundAsNull) {
+      return null;
     }
     if (!response.ok) {
       throw new CatalogUnavailableError(`The catalog answered ${response.status}.`);
@@ -76,5 +108,26 @@ function toProductSummary(product: ProductSummaryDto): ProductSummary {
     name: product.name,
     basePrice: moneyFromCents(product.basePriceInCents),
     imageUrl: product.imageUrl,
+  };
+}
+
+function toProductDetail(product: ProductDetailDto): ProductDetail {
+  return {
+    id: product.id,
+    brand: product.brand,
+    name: product.name,
+    description: product.description,
+    basePrice: moneyFromCents(product.basePriceInCents),
+    specs: Object.fromEntries(
+      Object.entries(product.specs).filter(([, value]) => value !== undefined),
+    ),
+    colorOptions: product.colorOptions.map((color) => ({ ...color })),
+    storageOptions: product.storageOptions.map((storage) => ({
+      capacity: storage.capacity,
+      price: moneyFromCents(storage.priceInCents),
+    })),
+    ...(product.similarProducts === undefined
+      ? {}
+      : { similarProducts: product.similarProducts.map(toProductSummary) }),
   };
 }

@@ -84,3 +84,56 @@ describe('HttpCatalogGateway', () => {
     await expect(search).rejects.not.toBeInstanceOf(CatalogUnavailableError);
   });
 });
+
+describe('HttpCatalogGateway.getProduct', () => {
+  const aDetailDto = {
+    id: 'SMG-S24U',
+    brand: 'Samsung',
+    name: 'Galaxy S24 Ultra',
+    description: 'Gama alta.',
+    basePriceInCents: 132900,
+    specs: { screen: '6.8"' },
+    colorOptions: [{ name: 'Negro', hexCode: '#000', imageUrl: 'https://catalog.test/black.webp' }],
+    storageOptions: [{ capacity: '256 GB', priceInCents: 122900 }],
+  };
+
+  it('fetches the product by its encoded id and maps it', async () => {
+    const { fetchStub, calls } = fetchReturning(200, aDetailDto);
+
+    const product = await new HttpCatalogGateway({ fetch: fetchStub }).getProduct('a/b');
+
+    expect(calls).toEqual(['/api/products/a%2Fb']);
+    expect(product).toEqual({
+      ...aDetailDto,
+      basePriceInCents: undefined,
+      basePrice: 132900,
+      storageOptions: [{ capacity: '256 GB', price: 122900 }],
+    });
+    expect(product).not.toHaveProperty('similarProducts');
+  });
+
+  it('keeps similar products when the BFF sends them', async () => {
+    const { fetchStub } = fetchReturning(200, { ...aDetailDto, similarProducts: [aProductDto] });
+
+    const product = await new HttpCatalogGateway({ fetch: fetchStub }).getProduct('SMG-S24U');
+
+    expect(product?.similarProducts?.[0]?.basePrice).toBe(132900);
+  });
+
+  it('resolves to null for an unknown product', async () => {
+    const { fetchStub } = fetchReturning(404, {
+      error: 'NOT_FOUND',
+      message: 'Product not found.',
+    });
+
+    expect(await new HttpCatalogGateway({ fetch: fetchStub }).getProduct('NOPE')).toBeNull();
+  });
+
+  it('rejects other failures as unavailable', async () => {
+    const { fetchStub } = fetchReturning(504, { error: 'UPSTREAM_TIMEOUT', message: 'x' });
+
+    await expect(
+      new HttpCatalogGateway({ fetch: fetchStub }).getProduct('SMG-S24U'),
+    ).rejects.toBeInstanceOf(CatalogUnavailableError);
+  });
+});

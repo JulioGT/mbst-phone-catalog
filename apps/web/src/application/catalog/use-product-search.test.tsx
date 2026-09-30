@@ -33,6 +33,10 @@ class ControlledGateway implements CatalogGateway {
     });
   }
 
+  getProduct(): Promise<null> {
+    return Promise.resolve(null);
+  }
+
   answer(searchTerm: string, products: ProductSummary[]): void {
     this.pending.get(searchTerm)?.resolve(products);
   }

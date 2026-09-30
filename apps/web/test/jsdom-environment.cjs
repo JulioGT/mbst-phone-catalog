@@ -25,6 +25,9 @@ module.exports = class BrowserLikeEnvironment extends TestEnvironment {
      * to jsdom, so React would warn about it. Only that tag is taught here;
      * any other unknown tag still triggers React's warning.
      */
+    // jsdom does not implement scrolling (React Router's ScrollRestoration scrolls).
+    this.global.scrollTo = () => undefined;
+
     const { document } = this.global;
     const createElement = document.createElement.bind(document);
     document.createElement = (tagName, options) => {

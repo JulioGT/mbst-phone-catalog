@@ -66,7 +66,12 @@ test/             renderApp, builders, test doubles, Jest setup (outside the lay
 ## Behavior decisions (UX)
 
 - A single available option is preselected and shown as selected.
-- Nothing chosen yet: "From X EUR" and the first color's image. After choosing a storage: that storage's price, without "From".
+- Nothing chosen yet: "From X EUR" (the catalog's `basePrice`, as designed; product owner decision, see `api-contract.md`) and the first color's image. After choosing a storage: that storage's price, without "From", announced through a polite live region.
+- All color images of a phone are preloaded when its page opens, so switching colors never shows the previous image while the new one loads.
+- Storage and color are native radio groups (`fieldset` + `legend`): arrow keys, and "selected" announced without ARIA.
+- `AÑADIR` uses `aria-disabled` (not `disabled`) so it stays focusable and its hint (what is missing) is read with it.
+- The detail hook scopes its state to the product id, so moving to a similar phone shows the loading state at once instead of the previous phone.
+- Focus after navigation: if the new page is still loading, focus waits on `<main>` and moves to the h1 when it appears (`ui/heading-focus.tsx`).
 - After adding to the cart the user gets confirmation, announced to assistive technology.
 - Removing a cart line moves focus somewhere sensible (next line, or the continue button when empty).
 - Search: skeletons while loading, a clear "No results" message, a retry action on errors.

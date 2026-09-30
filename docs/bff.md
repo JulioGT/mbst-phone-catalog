@@ -35,7 +35,7 @@ infrastructure/
   catalog/        HTTP adapter + upstream schemas (+ in-memory adapter for tests)
   config/         loadConfig: validates the environment
   flags/          EnvFeatureFlags (+ in-memory adapter for tests)
-  http/           createApp (Express), DTO mapping, error mapping
+  http/           createApp (Express), request schemas, DTO mapping, error mapping
   logging/        JSON-line logger (+ in-memory logger for tests)
 main.ts           composition root: reads config, builds adapters, starts the server
 scripts/          check-contract.ts (manual check against the live API)

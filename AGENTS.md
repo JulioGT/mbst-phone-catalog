@@ -57,6 +57,7 @@ Full rationale: `docs/architecture.md`.
 - Use the terms in `docs/product-language.md` exactly, in code, tests and copy keys. Add a term there before inventing a new one.
 - All user-facing strings live in one copy file, verbatim from the Figma designs (which mix English and Spanish on purpose; do not "fix" them silently).
 - Code, comments, docs and commits are in English.
+- Comments: `/** ... */` for anything longer than one line and for documenting declarations; `//` only for a single-line note.
 - Commits follow Conventional Commits (`docs/git-workflow.md`). Keep them small and single-purpose.
 
 ## Boundaries

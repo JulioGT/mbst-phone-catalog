@@ -1,5 +1,7 @@
-// Public API contract between the BFF and the web app: wire types plus runtime schemas.
-// Prices travel as integer cents (ADR 0006); the field names say so.
+/**
+ * Public API contract between the BFF and the web app: wire types plus runtime schemas.
+ * Prices travel as integer cents (ADR 0006); the field names say so.
+ */
 import { z } from 'zod';
 
 export const API_PATHS = {

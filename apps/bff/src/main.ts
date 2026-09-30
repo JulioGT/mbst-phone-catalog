@@ -1,5 +1,7 @@
-// Composition root: the only place that reads the environment, builds the
-// adapters and wires them into the use cases (docs/architecture.md).
+/**
+ * Composition root: the only place that reads the environment, builds the
+ * adapters and wires them into the use cases (docs/architecture.md).
+ */
 import { GetProductDetail } from './application/get-product-detail';
 import { ListProducts } from './application/list-products';
 import { HttpProductCatalog } from './infrastructure/catalog/http-product-catalog';

@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import { GetProductDetail } from '../../src/application/get-product-detail';
 import type { ProductCatalogPort } from '../../src/application/ports/product-catalog-port';
 import { CatalogUnavailableError, ProductNotFoundError } from '../../src/domain/errors';
-import { InMemoryProductCatalog } from '../../src/infrastructure/catalog/in-memory-product-catalog';
-import { InMemoryFeatureFlags } from '../../src/infrastructure/flags/in-memory-feature-flags';
 import { aProductDetail, rejectionOf } from '../builders';
+import { InMemoryFeatureFlags } from '../doubles/in-memory-feature-flags';
+import { InMemoryProductCatalog } from '../doubles/in-memory-product-catalog';
 
 const edge = aProductDetail({ id: 'MTE-EDGE50PRO' });
 const catalog = new InMemoryProductCatalog({ details: [edge] });

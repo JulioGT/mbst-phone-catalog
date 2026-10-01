@@ -1,5 +1,5 @@
-import type { FeatureFlagsPort } from '../../application/ports/feature-flags-port';
-import type { FeatureFlag } from '../../domain/feature-flag';
+import type { FeatureFlagsPort } from '../../src/application/ports/feature-flags-port';
+import type { FeatureFlag } from '../../src/domain/feature-flag';
 
 /** Flags fixed at construction; used in tests to cover both states of a flag. */
 export class InMemoryFeatureFlags implements FeatureFlagsPort {

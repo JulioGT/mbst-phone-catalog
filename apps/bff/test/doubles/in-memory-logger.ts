@@ -1,4 +1,4 @@
-import type { LogFields, Logger } from '../../application/ports/logger';
+import type { LogFields, Logger } from '../../src/application/ports/logger';
 
 export interface LogEntry {
   readonly level: 'info' | 'warn' | 'error';

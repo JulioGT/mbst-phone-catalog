@@ -1,6 +1,6 @@
-import type { ProductCatalogPort } from '../../application/ports/product-catalog-port';
-import type { ProductDetail, ProductSummary } from '../../domain/product';
-import type { ProductQuery } from '../../domain/product-query';
+import type { ProductCatalogPort } from '../../src/application/ports/product-catalog-port';
+import type { ProductDetail, ProductSummary } from '../../src/domain/product';
+import type { ProductQuery } from '../../src/domain/product-query';
 
 export interface InMemoryCatalogContents {
   readonly summaries?: readonly ProductSummary[];

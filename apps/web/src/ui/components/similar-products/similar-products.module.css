@@ -39,6 +39,7 @@
 }
 
 .cell {
+  aspect-ratio: 1 / 1;
   scroll-snap-align: start;
   border-right: 1px solid var(--color-text);
   border-bottom: 1px solid var(--color-text);

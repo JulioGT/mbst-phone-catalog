@@ -23,6 +23,8 @@ Two tiers only: primitives, then semantic names that components use.
 | Semantic: `--color-text`, `--color-text-muted`, `--color-border`, `--color-action`, `--color-action-text`, `--color-danger` | map to the above | |
 | Spacing | 4px scale: `--space-1` (4px) ... `--space-12` (48px) | estimated |
 | Type sizes | `--font-size-xs`, `-sm`, `-md`, `-lg` | estimated |
+| `--color-text-inverse`, `--color-text-inverse-muted` | white, `#b3b3b3` (21:1 and 10:1 on black) | card hover state |
+| `--ease-spring`, `--duration-spring` | `linear(…)` sampled from the prototype's spring (mass 1, stiffness 80, damping 20), 1.34 s | Figma prototype; `cubic-bezier` fallback for browsers without `linear()` |
 
 ## Breakpoints
 
@@ -33,6 +35,8 @@ Custom properties cannot be used inside media queries, so these are literal valu
 | Mobile | < 768px | 1 | image above buying options |
 | Tablet | 768px to 1199px | 2 | image left, buying options right |
 | Desktop | >= 1200px | 5 | same as tablet, wider |
+
+Product cards are **square** at every width: 344 x 344 in the 1920 px desktop frame ((1920 - 2 x 100) / 5), 377 x 377 in the 834 px tablet frame. The image takes the space left by the text.
 
 The tablet frame is 834px wide. The 768px and 1200px boundaries are our inference; the phone frame width is not in the screenshots.
 
@@ -67,7 +71,7 @@ The tablet frame is 834px wide. The 768px and 1200px boundaries are our inferenc
 11. **The logo is a text stand-in** ("MBST" in bold) until the SVG export is available.
 12. **The bag link has a 44x44px touch target**, larger than the drawn icon, for touch accessibility (WCAG 2.5.5).
 13. **A "Skip to content" link** appears on the first Tab press; it is invisible otherwise.
-14. **Product cards underline the name on hover** (the designs show no hover state) and the whole card is one link.
+14. **Product card hover follows the prototype** ("Hover" variant, Smart Animate spring): black fills the card from the bottom and the text turns white. Keyboard focus shows the same state (with a white focus ring), the effect is skipped on touch screens (`hover: hover`), and it is instant when the system asks for reduced motion. The whole card is one link.
 15. **The search underline thickens on focus**, which is the input's focus indicator.
 16. **The clear "x" has a 44x44px touch target** around the small icon.
 17. **Brand labels on cards are 12px** (the frames look smaller; deviation 4 sets our minimum).

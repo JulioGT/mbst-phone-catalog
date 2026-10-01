@@ -3,8 +3,8 @@ import { ListProducts } from '../../src/application/list-products';
 import type { ProductCatalogPort } from '../../src/application/ports/product-catalog-port';
 import { CatalogUnavailableError, InvalidProductQueryError } from '../../src/domain/errors';
 import type { ProductQuery } from '../../src/domain/product-query';
-import { InMemoryProductCatalog } from '../../src/infrastructure/catalog/in-memory-product-catalog';
 import { aProductSummary, rejectionOf } from '../builders';
+import { InMemoryProductCatalog } from '../doubles/in-memory-product-catalog';
 
 const iphone = aProductSummary({ id: 'APL-IP13-128', brand: 'Apple', name: 'iPhone 13' });
 const galaxy = aProductSummary({ id: 'SMG-S24', brand: 'Samsung', name: 'Galaxy S24' });

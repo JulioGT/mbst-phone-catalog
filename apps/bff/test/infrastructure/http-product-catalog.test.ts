@@ -4,8 +4,8 @@ import {
   DUPLICATE_HEADROOM,
   HttpProductCatalog,
 } from '../../src/infrastructure/catalog/http-product-catalog';
-import { InMemoryLogger } from '../../src/infrastructure/logging/in-memory-logger';
 import { rejectionOf } from '../builders';
+import { InMemoryLogger } from '../doubles/in-memory-logger';
 import { json, type StubServer, startStubServer } from '../support/stub-server';
 import { anUpstreamDetail, anUpstreamSummary } from '../support/upstream-fixtures';
 

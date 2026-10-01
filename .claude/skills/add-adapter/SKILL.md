@@ -15,7 +15,7 @@ Adapters live in `infrastructure/` and implement an interface that `application/
 4. **Normalize known quirks here and only here** (see `docs/api-contract.md`): `http` to `https` image URLs, decimal prices to cents, duplicates by `id`.
 5. **Map failures to domain errors** using the table in `docs/architecture.md` (not found, unavailable, invalid response). Never leak upstream auth details or the API key.
 6. **Test the adapter for real behavior**: a local stub server for HTTP, an in-memory `Storage` for browser storage. Cover success, not found, unauthorized, timeout, malformed payload, and each quirk.
-7. **Keep an in-memory twin** for use-case and component tests.
+7. **Keep an in-memory twin** for use-case and component tests, in the test folder (`apps/bff/test/doubles/`, `apps/web/test/`), not in `src/`.
 8. **Run `pnpm verify`.**
 
 ## Checklist

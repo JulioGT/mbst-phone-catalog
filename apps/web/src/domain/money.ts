@@ -10,8 +10,6 @@ export function moneyFromCents(cents: number): Money {
   return cents as Money;
 }
 
-export const ZERO_MONEY = moneyFromCents(0);
-
 export function sumMoney(amounts: readonly Money[]): Money {
   return moneyFromCents(amounts.reduce((total, amount) => total + amount, 0));
 }

@@ -7,11 +7,11 @@ import type { ProductCatalogPort } from '../../src/application/ports/product-cat
 import { CatalogUnavailableError } from '../../src/domain/errors';
 import type { FeatureFlag } from '../../src/domain/feature-flag';
 import { moneyFromCents } from '../../src/domain/money';
-import { InMemoryProductCatalog } from '../../src/infrastructure/catalog/in-memory-product-catalog';
-import { InMemoryFeatureFlags } from '../../src/infrastructure/flags/in-memory-feature-flags';
 import { createApp } from '../../src/infrastructure/http/create-app';
-import { InMemoryLogger } from '../../src/infrastructure/logging/in-memory-logger';
 import { aProductDetail, aProductSummary } from '../builders';
+import { InMemoryFeatureFlags } from '../doubles/in-memory-feature-flags';
+import { InMemoryLogger } from '../doubles/in-memory-logger';
+import { InMemoryProductCatalog } from '../doubles/in-memory-product-catalog';
 
 const iphone = aProductSummary({ id: 'APL-IP13-128', brand: 'Apple', name: 'iPhone 13' });
 const galaxy = aProductSummary({ id: 'SMG-S24', brand: 'Samsung', name: 'Galaxy S24' });

@@ -5,11 +5,11 @@ import { expect } from 'chai';
 import request from 'supertest';
 import { GetProductDetail } from '../../src/application/get-product-detail';
 import { ListProducts } from '../../src/application/list-products';
-import { InMemoryProductCatalog } from '../../src/infrastructure/catalog/in-memory-product-catalog';
-import { InMemoryFeatureFlags } from '../../src/infrastructure/flags/in-memory-feature-flags';
 import { createApp } from '../../src/infrastructure/http/create-app';
-import { InMemoryLogger } from '../../src/infrastructure/logging/in-memory-logger';
 import { aProductSummary } from '../builders';
+import { InMemoryFeatureFlags } from '../doubles/in-memory-feature-flags';
+import { InMemoryLogger } from '../doubles/in-memory-logger';
+import { InMemoryProductCatalog } from '../doubles/in-memory-product-catalog';
 
 describe('serving the built web app', () => {
   let directory: string;

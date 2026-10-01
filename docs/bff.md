@@ -32,16 +32,16 @@ application/
   list-products.ts, get-product-detail.ts
   ports/          ProductCatalogPort, FeatureFlagsPort, Logger
 infrastructure/
-  catalog/        HTTP adapter + upstream schemas (+ in-memory adapter for tests)
+  catalog/        HTTP adapter + upstream schemas
   config/         loadConfig: validates the environment
-  flags/          EnvFeatureFlags (+ in-memory adapter for tests)
+  flags/          EnvFeatureFlags
   http/           createApp (Express), request schemas, DTO mapping, error mapping
-  logging/        JSON-line logger (+ in-memory logger for tests)
+  logging/        JSON-line logger
 main.ts           composition root: reads config, builds adapters, starts the server
 scripts/          check-contract.ts (manual check against the live API)
 ```
 
-Tests live in `apps/bff/test/`, mirroring `src/`. They are kept out of `src/` because a domain test imports Chai, which the `domain-is-pure` rule forbids inside `src/domain/`.
+Tests live in `apps/bff/test/`, mirroring `src/`; in-memory test doubles of each port (`InMemoryProductCatalog`, `InMemoryFeatureFlags`, `InMemoryLogger`) live in `apps/bff/test/doubles/`, so production code contains only what production runs. They are kept out of `src/` because a domain test imports Chai, which the `domain-is-pure` rule forbids inside `src/domain/`.
 
 The list query is a domain rule (`domain/product-query.ts`): the search term is trimmed (blank means no search), `limit` defaults to 20 and must be 1..50, and the term is at most 100 characters. `ListProducts` also caps the result at `limit` even if the catalog returns more. Routes (chunk 3) turn `InvalidProductQueryError` into `400`.
 

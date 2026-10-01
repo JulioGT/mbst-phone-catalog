@@ -3,7 +3,7 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!**/tools/architecture/fixtures", "!**/docs/samples", "!**/pnpm-lock.yaml"]
+    "includes": ["**", "!**/tools/architecture/fixtures", "!**/pnpm-lock.yaml"]
   },
   "formatter": {
     "enabled": true,

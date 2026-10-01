@@ -1,4 +1,4 @@
-// Payloads in the remote API's own shape (docs/api-contract.md, docs/samples/).
+// Payloads in the remote API's own shape (docs/api-contract.md).
 
 export function anUpstreamSummary(overrides: Record<string, unknown> = {}) {
   return {

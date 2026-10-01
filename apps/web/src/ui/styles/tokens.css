@@ -24,6 +24,8 @@
   --color-action-disabled: var(--color-grey-100);
   --color-danger: var(--color-red-700);
   --color-focus: var(--color-black);
+  --color-text-inverse: var(--color-white);
+  --color-text-inverse-muted: #b3b3b3; /* 9:1 on black */
 
   /* Spacing: 4px scale (estimated) */
   --space-1: 4px;
@@ -45,6 +47,36 @@
   --font-weight-bold: 700;
   --line-height-base: 1.4;
 
+  /*
+   * Motion: Figma's Smart Animate spring (mass 1, stiffness 80, damping 20),
+   * sampled into a CSS linear() curve. It is overdamped (no bounce) and
+   * reaches 99.9% at 1.34 s; visually it is done at about half that.
+   */
+  --ease-spring: linear(
+    0,
+    0.117,
+    0.317,
+    0.5,
+    0.644,
+    0.75,
+    0.826,
+    0.879,
+    0.916,
+    0.942,
+    0.96,
+    0.972,
+    0.981,
+    0.987,
+    0.991,
+    0.994,
+    0.996,
+    0.997,
+    0.998,
+    0.999,
+    1
+  );
+  --duration-spring: 1.34s;
+
   /* Layout */
   --page-gutter: var(--space-6);
   --header-height: 80px; /* estimated */
@@ -60,5 +92,11 @@
 @media (min-width: 1200px) {
   :root {
     --page-gutter: var(--space-25);
+  }
+}
+
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root {
+    --ease-spring: cubic-bezier(0.15, 0.85, 0.3, 1);
   }
 }
